@@ -1,34 +1,474 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مختصراتي</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>مختصراتي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+/* ══ RESET & ROOT ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:      #080e1c;
+  --bg-card: #0c1528;
+  --bg-card2:#101e36;
+  --border:  #1a3352;
+  --bhl:     #2563eb44;
+  --txt:     #ddeaf8;
+  --muted:   #5a7ca0;
+  --accent:  #3b82f6;
+  --accent2: #06b6d4;
+  --rad:     14px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cairo',sans-serif;
+  background:var(--bg);color:var(--txt);
+  min-height:100vh;overflow-x:hidden;direction:rtl;
+}
+
+/* ══ BG ══ */
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(#1e3a5f1a 1px,transparent 1px),
+                   linear-gradient(90deg,#1e3a5f1a 1px,transparent 1px);
+  background-size:44px 44px;
+}
+.bg-glow{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 45% at 25% 15%,#1e3fad1e 0%,transparent 65%),
+    radial-gradient(ellipse 45% 35% at 80% 80%,#0e749018 0%,transparent 55%);
+}
+
+/* ══ LAYOUT ══ */
+.container{position:relative;z-index:1;max-width:1140px;margin:0 auto;padding:36px 20px 100px}
+
+/* ══ HEADER ══ */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;margin-bottom:36px;
+  animation:fadeDown .6s ease both;
+}
+.header-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:2rem;filter:drop-shadow(0 0 12px #3b82f688);animation:pulse-logo 3s ease-in-out infinite}
+@keyframes pulse-logo{0%,100%{filter:drop-shadow(0 0 12px #3b82f688)}50%{filter:drop-shadow(0 0 24px #06b6d4cc)}}
+.header h1{
+  font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;
+  background:linear-gradient(135deg,#93c5fd,#38bdf8,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.subtitle{font-size:.88rem;color:var(--muted);margin-top:2px;width:100%}
+.header-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ══ BUTTONS ══ */
+.add-btn{
+  position:relative;display:flex;align-items:center;gap:9px;
+  padding:12px 24px;border-radius:50px;border:1px solid #3b82f644;
+  font-family:inherit;font-size:.98rem;font-weight:700;color:#fff;cursor:pointer;
+  overflow:hidden;transition:transform .2s,box-shadow .2s;
+}
+.add-btn.blue{background:linear-gradient(135deg,#1d4ed8,#0e7490);box-shadow:0 4px 18px #1d4ed844}
+.add-btn.violet{background:linear-gradient(135deg,#6d28d9,#7c3aed);box-shadow:0 4px 18px #6d28d944;border-color:#7c3aed44}
+.add-btn.green{background:linear-gradient(135deg,#065f46,#0891b2);box-shadow:0 4px 18px #06564644;border-color:#10b98144}
+.add-btn.amber{background:linear-gradient(135deg,#92400e,#b45309);box-shadow:0 4px 18px #92400e44;border-color:#f59e0b44}
+
+/* ══ BACKUP BAR ══ */
+.backup-bar{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:13px 18px;margin-bottom:26px;
+  background:linear-gradient(135deg,#0c1a30,#0f2040);
+  border:1px solid #1e3a5f;border-radius:14px;
+  animation:fadeDown .6s .05s ease both;
+}
+.backup-bar-label{
+  font-size:.82rem;font-weight:700;color:var(--muted);
+  display:flex;align-items:center;gap:6px;margin-left:auto;
+}
+.backup-bar-label span{color:#38bdf8}
+.backup-btn{
+  display:flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:30px;border:none;
+  font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;
+  transition:transform .2s,box-shadow .2s,filter .2s;position:relative;overflow:hidden;
+}
+.backup-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ffffff15,transparent 55%);pointer-events:none}
+.backup-btn:hover{transform:translateY(-2px) scale(1.04)}
+.backup-btn:active{transform:scale(.96)}
+.backup-btn.export{
+  background:linear-gradient(135deg,#1e3a8a,#1d4ed8);
+  color:#fff;box-shadow:0 4px 16px #1e3a8a55;
+}
+.backup-btn.import{
+  background:linear-gradient(135deg,#064e3b,#065f46);
+  color:#fff;box-shadow:0 4px 16px #06503b55;
+}
+.backup-btn .bico{font-size:1rem}
+
+/* ══ IMPORT CONFIRM MODAL ══ */
+.confirm-box{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:16px;
+  padding:28px 24px;max-width:400px;width:100%;
+  box-shadow:0 24px 60px #00000099;
+  transform:translateY(30px) scale(.96);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.modal-overlay.active .confirm-box{transform:translateY(0) scale(1)}
+.confirm-box h3{font-size:1.05rem;font-weight:700;margin-bottom:10px}
+.confirm-box p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.confirm-btns{display:flex;gap:10px;justify-content:flex-end}
+.confirm-stat{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;
+}
+.confirm-stat-item{
+  flex:1;min-width:90px;padding:10px;border-radius:10px;
+  background:var(--bg);border:1px solid var(--border);text-align:center;
+}
+.confirm-stat-item .csn{font-size:1.3rem;font-weight:900;color:var(--txt)}
+.confirm-stat-item .csl{font-size:.72rem;color:var(--muted);margin-top:2px}
+.add-btn:hover{transform:translateY(-3px) scale(1.03)}
+.add-btn:active{transform:translateY(0) scale(.97)}
+.add-btn-icon{font-size:1.3rem;font-weight:900;transition:transform .3s;line-height:1}
+.add-btn:hover .add-btn-icon{transform:rotate(90deg)}
+.add-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ffffff18,transparent 55%);pointer-events:none}
+
+/* ══ TABS ══ */
+.tabs{display:flex;gap:6px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:0;animation:fadeDown .6s .1s ease both;overflow-x:auto}
+.tab-btn{
+  padding:10px 20px;border:none;background:none;color:var(--muted);
+  font-family:inherit;font-size:.93rem;font-weight:600;cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;
+  margin-bottom:-1px;
+}
+.tab-btn.active{color:var(--txt);border-bottom-color:var(--accent)}
+.tab-btn:hover:not(.active){color:var(--txt)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* ══ SHORTCUTS GRID ══ */
+.shortcuts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(195px,1fr));
+  gap:14px;min-height:180px;
+}
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:70px 20px;
+  color:var(--muted);animation:fadeIn .5s ease;
+}
+.empty-icon{font-size:3rem;margin-bottom:12px;opacity:.45}
+.empty-state p{font-size:1rem;font-weight:600;margin-bottom:4px}
+.empty-state span{font-size:.85rem;opacity:.65}
+
+/* ══ SHORTCUT CARD ══ */
+.shortcut-card{
+  position:relative;border-radius:var(--rad);
+  background:var(--bg-card);border:1px solid var(--border);
+  overflow:hidden;cursor:grab;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+  animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;
+}
+.shortcut-card:hover{transform:translateY(-4px) scale(1.02);border-color:var(--bhl);box-shadow:0 12px 36px #00000055}
+.shortcut-card.dragging{opacity:.45;transform:scale(.93);cursor:grabbing;z-index:999}
+.shortcut-card.drag-over{border-color:#3b82f6;box-shadow:0 0 0 2px #3b82f655}
+.card-bar{height:4px;width:100%;transition:height .2s}
+.shortcut-card:hover .card-bar{height:6px}
+.card-body{padding:16px 14px 12px}
+.card-link{display:flex;align-items:flex-start;gap:10px;text-decoration:none;color:inherit;outline:none}
+.card-icon{
+  width:38px;height:38px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  background:var(--bg-card2);border:1px solid var(--border);transition:transform .2s;
+}
+.shortcut-card:hover .card-icon{transform:scale(1.1) rotate(-5deg)}
+.card-info{flex:1;min-width:0}
+.card-name{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.card-desc{font-size:.75rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-actions{display:flex;gap:5px;padding:6px 14px 10px;opacity:0;transition:opacity .2s;justify-content:flex-end}
+.shortcut-card:hover .card-actions{opacity:1}
+.card-action-btn{
+  width:28px;height:28px;border-radius:7px;border:1px solid var(--border);
+  background:var(--bg-card2);color:var(--muted);font-size:.8rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.card-action-btn:hover{color:var(--txt);border-color:var(--accent);background:#1e3a5f44}
+.card-action-btn.del:hover{color:#ef4444;border-color:#ef4444}
+
+/* ══ SCRIPT CARDS ══ */
+.scripts-list{display:flex;flex-direction:column;gap:12px}
+.script-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rad);
+  overflow:hidden;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;
+  transition:border-color .2s;
+}
+.script-card:hover{border-color:var(--bhl)}
+.script-header{
+  display:flex;align-items:center;gap:12px;padding:14px 16px;
+  cursor:pointer;background:var(--bg-card2);
+}
+.script-badge{
+  padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;
+  background:#7c3aed22;color:#a78bfa;border:1px solid #7c3aed44;flex-shrink:0;
+}
+.script-title{flex:1;font-weight:700;font-size:.95rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.script-chevron{color:var(--muted);font-size:.8rem;transition:transform .3s;flex-shrink:0}
+.script-card.open .script-chevron{transform:rotate(180deg)}
+.script-actions{display:flex;gap:6px;flex-shrink:0}
+.script-body{display:none;padding:16px}
+.script-card.open .script-body{display:block}
+
+/* ── Script content ── */
+.script-content{
+  font-size:.9rem;line-height:1.85;color:var(--txt);
+  white-space:pre-wrap;word-break:break-word;
+}
+.script-content .ts{
+  display:inline-flex;align-items:center;gap:5px;
+  background:#06b6d422;color:#38bdf8;border:1px solid #06b6d433;
+  border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700;
+  margin:0 3px;cursor:default;user-select:none;
+}
+.script-content b{font-weight:800;color:#fff}
+.script-content i{color:#a78bfa;font-style:normal}
+.script-content u{text-decoration:underline;text-decoration-color:#3b82f666}
+.script-desc-area{font-size:.82rem;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+
+/* ══ VAULT CARDS ══ */
+.vault-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.vault-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rad);
+  padding:16px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;
+  transition:border-color .2s,box-shadow .2s;
+}
+.vault-card:hover{border-color:var(--bhl);box-shadow:0 8px 28px #00000044}
+.vault-card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.vault-icon{
+  width:36px;height:36px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  background:linear-gradient(135deg,#065f4622,#0891b222);border:1px solid #10b98133;
+}
+.vault-site{font-weight:700;font-size:.95rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vault-email-row,.vault-pass-row{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;border-radius:8px;
+  background:var(--bg);border:1px solid var(--border);margin-bottom:6px;
+}
+.vault-label{font-size:.72rem;color:var(--muted);font-weight:700;flex-shrink:0;min-width:40px}
+.vault-val{flex:1;font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vault-val.pass-hidden{letter-spacing:3px;font-size:1rem;color:var(--muted)}
+.vault-copy-btn,.vault-toggle-btn{
+  width:26px;height:26px;border-radius:6px;flex-shrink:0;
+  border:1px solid var(--border);background:var(--bg-card2);
+  color:var(--muted);font-size:.8rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.vault-copy-btn:hover{color:var(--accent);border-color:var(--accent)}
+.vault-toggle-btn:hover{color:var(--txt);border-color:var(--txt)}
+.vault-card-actions{display:flex;gap:6px;justify-content:flex-end;margin-top:8px}
+
+/* ══ MODAL ══ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:#000000bb;backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:16px;opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-overlay.active{opacity:1;pointer-events:all}
+.modal{
+  width:100%;max-width:520px;max-height:92vh;overflow-y:auto;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:20px;box-shadow:0 24px 60px #00000099;
+  transform:translateY(30px) scale(.96);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.modal-overlay.active .modal{transform:translateY(0) scale(1)}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 22px 16px;border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,#0c1528,#101e36);
+  position:sticky;top:0;z-index:5;
+}
+.modal-header h2{font-size:1.1rem;font-weight:700}
+.modal-close{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--border);
+  background:var(--bg-card2);color:var(--muted);font-size:.9rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.modal-close:hover{color:#ef4444;border-color:#ef4444;background:#ef444411}
+.modal-body{padding:18px 22px}
+.modal-footer{
+  display:flex;gap:10px;justify-content:flex-end;
+  padding:14px 22px 20px;border-top:1px solid var(--border);
+  position:sticky;bottom:0;background:var(--bg-card);z-index:5;
+}
+
+/* ── Fields ── */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.83rem;font-weight:600;color:var(--muted);margin-bottom:6px}
+.field input,.field textarea,.field select{
+  width:100%;padding:10px 13px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:9px;color:var(--txt);
+  font-family:inherit;font-size:.92rem;
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.field textarea{resize:vertical;min-height:90px;line-height:1.7}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #3b82f620}
+.field input::placeholder,.field textarea::placeholder{color:#304d6a}
+.required{color:#ef4444}
+.field select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a7ca0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 12px center}
+
+/* ── Script Editor Toolbar ── */
+.editor-toolbar{
+  display:flex;flex-wrap:wrap;gap:5px;padding:8px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:9px 9px 0 0;border-bottom:none;
+}
+.toolbar-btn{
+  padding:5px 10px;border-radius:6px;border:1px solid var(--border);
+  background:var(--bg-card2);color:var(--txt);font-family:inherit;
+  font-size:.8rem;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.toolbar-btn:hover{background:#1e3a5f;border-color:var(--accent)}
+.toolbar-sep{width:1px;background:var(--border);margin:0 3px;align-self:stretch}
+.ts-input-row{display:flex;gap:6px;align-items:center;width:100%}
+.ts-input-row input{
+  flex:1;padding:5px 9px;background:var(--bg);border:1px solid var(--border);
+  border-radius:6px;color:var(--txt);font-family:inherit;font-size:.82rem;outline:none;
+}
+.ts-input-row input:focus{border-color:var(--accent2)}
+.field .editor-area{
+  border-radius:0 0 9px 9px;border:1px solid var(--border);border-top:none;
+  padding:10px 13px;background:var(--bg);color:var(--txt);
+  font-family:inherit;font-size:.92rem;min-height:120px;
+  resize:vertical;outline:none;width:100%;line-height:1.7;
+  transition:border-color .2s,box-shadow .2s;
+}
+.field .editor-area:focus{border-color:var(--accent);box-shadow:0 0 0 3px #3b82f620}
+
+/* ── Color Picker ── */
+.color-picker{display:flex;flex-wrap:wrap;gap:9px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:9px}
+.color-opt{width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .2s,box-shadow .2s;border:3px solid transparent;position:relative;flex-shrink:0}
+.color-opt:hover{transform:scale(1.2)}
+.color-opt.selected{border-color:#fff;box-shadow:0 0 0 2px #ffffff44,0 4px 12px #00000066;transform:scale(1.15)}
+.color-opt.selected::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78rem;font-weight:700}
+
+/* ── Buttons ── */
+.btn-cancel{
+  padding:9px 20px;border-radius:9px;border:1px solid var(--border);
+  background:var(--bg-card2);color:var(--muted);
+  font-family:inherit;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .15s;
+}
+.btn-cancel:hover{color:var(--txt);border-color:var(--muted)}
+.btn-save{
+  padding:9px 24px;border-radius:9px;border:none;
+  background:linear-gradient(135deg,#1d4ed8,#0e7490);
+  color:#fff;font-family:inherit;font-size:.92rem;font-weight:700;
+  cursor:pointer;transition:all .2s;box-shadow:0 4px 14px #1d4ed844;
+}
+.btn-save:hover{transform:translateY(-2px);box-shadow:0 6px 20px #1d4ed866}
+.btn-save.violet{background:linear-gradient(135deg,#6d28d9,#7c3aed);box-shadow:0 4px 14px #6d28d944}
+.btn-save.green{background:linear-gradient(135deg,#065f46,#0891b2);box-shadow:0 4px 14px #06564644}
+
+/* ══ CONTEXT MENU ══ */
+.ctx-menu{
+  position:fixed;z-index:2000;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:10px;padding:5px;box-shadow:0 8px 28px #00000077;
+  opacity:0;pointer-events:none;transform:scale(.9);transition:opacity .15s,transform .15s;min-width:135px;
+}
+.ctx-menu.active{opacity:1;pointer-events:all;transform:scale(1)}
+.ctx-item{
+  display:flex;align-items:center;gap:7px;width:100%;padding:8px 11px;
+  border:none;background:none;color:var(--txt);font-family:inherit;
+  font-size:.88rem;cursor:pointer;border-radius:6px;text-align:right;transition:background .15s;
+}
+.ctx-item:hover{background:var(--bg-card2)}
+.ctx-item.del{color:#ef4444}.ctx-item.del:hover{background:#ef444411}
+
+/* ══ TOAST ══ */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1e3a5f;border:1px solid var(--accent);color:var(--txt);
+  padding:11px 22px;border-radius:30px;font-size:.88rem;font-weight:600;
+  z-index:9999;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;
+  opacity:0;white-space:nowrap;box-shadow:0 8px 24px #00000066;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:scale(.78) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:640px){
+  .header{flex-direction:column;align-items:flex-start}
+  .header-actions{width:100%}
+  .add-btn{flex:1;justify-content:center}
+  .shortcuts-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
+  .vault-grid{grid-template-columns:1fr}
+  .modal{max-width:100%;border-radius:16px}
+  .tabs{gap:0}
+  .tab-btn{padding:9px 13px;font-size:.85rem}
+}
+@media(max-width:380px){
+  .shortcuts-grid{grid-template-columns:1fr 1fr}
+  .header-actions{flex-direction:column}
+}
+</style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="toast" id="toast"></div>
 
-  <div class="container">
-    <header class="header">
-      <div class="header-title">
-        <div class="logo-icon">⚡</div>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">⚡</div>
+      <div>
         <h1>مختصراتي</h1>
-        <p class="subtitle">روابطك المفضلة في متناول يدك</p>
+        <p class="subtitle">روابطك وسكريبتاتك وبياناتك في مكان واحد</p>
       </div>
-      <button class="add-btn" id="addBtn">
-        <span class="add-btn-icon">+</span>
-        <span class="add-btn-text">إضافة مختصر</span>
-        <div class="add-btn-glow"></div>
+    </div>
+    <div class="header-actions" id="headerActions">
+      <button class="add-btn blue" id="addShortcutBtn">
+        <span class="add-btn-icon">+</span><span>إضافة مختصر</span>
       </button>
-    </header>
+      <button class="add-btn violet" id="addScriptBtn" style="display:none">
+        <span class="add-btn-icon">+</span><span>إضافة سكريبت</span>
+      </button>
+      <button class="add-btn green" id="addVaultBtn" style="display:none">
+        <span class="add-btn-icon">+</span><span>إضافة بيانات</span>
+      </button>
+    </div>
+  </header>
 
+  <!-- BACKUP BAR -->
+  <div class="backup-bar">
+    <button class="backup-btn export" id="exportBtn">
+      <span class="bico">💾</span> تصدير النسخة الاحتياطية
+    </button>
+    <button class="backup-btn import" id="importBtn">
+      <span class="bico">📂</span> استيراد نسخة احتياطية
+    </button>
+    <input type="file" id="importFile" accept=".json" style="display:none"/>
+    <div class="backup-bar-label">🛡️ بياناتك محفوظة في <span>localStorage</span></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="shortcuts">🔗 المختصرات</button>
+    <button class="tab-btn" data-tab="scripts">🎬 السكريبتات</button>
+    <button class="tab-btn" data-tab="vault">🔐 الخزنة</button>
+  </div>
+
+  <!-- TAB: SHORTCUTS -->
+  <div class="tab-panel active" id="tab-shortcuts">
     <div class="shortcuts-grid" id="shortcutsGrid">
-      <div class="empty-state" id="emptyState">
+      <div class="empty-state" id="emptyShortcuts">
         <div class="empty-icon">🔗</div>
         <p>لا يوجد مختصرات بعد</p>
         <span>اضغط على "إضافة مختصر" للبدء</span>
@@ -36,55 +476,693 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <h2 id="modalTitle">إضافة مختصر جديد</h2>
-        <button class="modal-close" id="modalClose">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="field">
-          <label>🔗 الرابط <span class="required">*</span></label>
-          <input type="url" id="inputUrl" placeholder="https://example.com" />
-        </div>
-        <div class="field">
-          <label>✏️ الاسم</label>
-          <input type="text" id="inputName" placeholder="اسم تلقائي برقم إن تُرك فارغاً" />
-        </div>
-        <div class="field">
-          <label>📝 الوصف</label>
-          <input type="text" id="inputDesc" placeholder="وصف قصير (اختياري)" />
-        </div>
-        <div class="field">
-          <label>🎨 لون الزرار</label>
-          <div class="color-picker">
-            <div class="color-option selected" data-color="#6b7280" style="background:#6b7280" title="رمادي (افتراضي)"></div>
-            <div class="color-option" data-color="#3b82f6" style="background:#3b82f6" title="أزرق"></div>
-            <div class="color-option" data-color="#06b6d4" style="background:#06b6d4" title="سماوي"></div>
-            <div class="color-option" data-color="#8b5cf6" style="background:#8b5cf6" title="بنفسجي"></div>
-            <div class="color-option" data-color="#ec4899" style="background:#ec4899" title="وردي"></div>
-            <div class="color-option" data-color="#10b981" style="background:#10b981" title="أخضر"></div>
-            <div class="color-option" data-color="#f59e0b" style="background:#f59e0b" title="ذهبي"></div>
-            <div class="color-option" data-color="#ef4444" style="background:#ef4444" title="أحمر"></div>
-            <div class="color-option" data-color="#f97316" style="background:#f97316" title="برتقالي"></div>
-            <div class="color-option" data-color="#14b8a6" style="background:#14b8a6" title="فيروزي"></div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-cancel" id="btnCancel">إلغاء</button>
-        <button class="btn-save" id="btnSave">💾 حفظ</button>
+  <!-- TAB: SCRIPTS -->
+  <div class="tab-panel" id="tab-scripts">
+    <div class="scripts-list" id="scriptsList">
+      <div class="empty-state">
+        <div class="empty-icon">🎬</div>
+        <p>لا يوجد سكريبتات بعد</p>
+        <span>اضغط على "إضافة سكريبت" للبدء</span>
       </div>
     </div>
   </div>
 
-  <!-- Context Menu -->
-  <div class="context-menu" id="contextMenu">
-    <button class="ctx-item" id="ctxEdit">✏️ تعديل</button>
-    <button class="ctx-item ctx-delete" id="ctxDelete">🗑️ حذف</button>
+  <!-- TAB: VAULT -->
+  <div class="tab-panel" id="tab-vault">
+    <div class="vault-grid" id="vaultGrid">
+      <div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-icon">🔐</div>
+        <p>الخزنة فارغة</p>
+        <span>اضغط على "إضافة بيانات" للبدء</span>
+      </div>
+    </div>
   </div>
 
-  <script src="main.js"></script>
+</div><!-- /container -->
+
+
+<!-- ══════════════════════════════════════
+     MODAL: SHORTCUT
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="shortcutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="shortcutModalTitle">إضافة مختصر جديد</h2>
+      <button class="modal-close" data-close="shortcutModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>🔗 الرابط <span class="required">*</span></label>
+        <input type="url" id="sUrl" placeholder="https://example.com"/>
+      </div>
+      <div class="field">
+        <label>✏️ الاسم</label>
+        <input type="text" id="sName" placeholder="اسم تلقائي برقم إن تُرك فارغاً"/>
+      </div>
+      <div class="field">
+        <label>📝 الوصف</label>
+        <input type="text" id="sDesc" placeholder="وصف قصير (اختياري)"/>
+      </div>
+      <div class="field">
+        <label>🎨 لون الزرار</label>
+        <div class="color-picker" id="shortcutColors">
+          <div class="color-opt selected" data-color="#6b7280" style="background:#6b7280" title="رمادي"></div>
+          <div class="color-opt" data-color="#3b82f6" style="background:#3b82f6" title="أزرق"></div>
+          <div class="color-opt" data-color="#06b6d4" style="background:#06b6d4" title="سماوي"></div>
+          <div class="color-opt" data-color="#8b5cf6" style="background:#8b5cf6" title="بنفسجي"></div>
+          <div class="color-opt" data-color="#ec4899" style="background:#ec4899" title="وردي"></div>
+          <div class="color-opt" data-color="#10b981" style="background:#10b981" title="أخضر"></div>
+          <div class="color-opt" data-color="#f59e0b" style="background:#f59e0b" title="ذهبي"></div>
+          <div class="color-opt" data-color="#ef4444" style="background:#ef4444" title="أحمر"></div>
+          <div class="color-opt" data-color="#f97316" style="background:#f97316" title="برتقالي"></div>
+          <div class="color-opt" data-color="#14b8a6" style="background:#14b8a6" title="فيروزي"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" data-close="shortcutModal">إلغاء</button>
+      <button class="btn-save" id="saveShortcut">💾 حفظ</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     MODAL: SCRIPT
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="scriptModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="scriptModalTitle">إضافة سكريبت جديد</h2>
+      <button class="modal-close" data-close="scriptModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>✏️ عنوان السكريبت <span class="required">*</span></label>
+        <input type="text" id="scTitle" placeholder="مثال: سكريبت تعريف المنتج"/>
+      </div>
+      <div class="field">
+        <label>🎬 نص السكريبت</label>
+        <!-- Toolbar -->
+        <div class="editor-toolbar" id="editorToolbar">
+          <button class="toolbar-btn" data-cmd="bold" title="عريض">B</button>
+          <button class="toolbar-btn" data-cmd="italic" title="مائل"><i>I</i></button>
+          <button class="toolbar-btn" data-cmd="underline" title="تحته خط"><u>U</u></button>
+          <div class="toolbar-sep"></div>
+          <div class="ts-input-row">
+            <input type="text" id="tsInput" placeholder="لقطة / توقيت (مثال: 0:45)"/>
+            <button class="toolbar-btn" id="insertTsBtn">⏱ إدراج توقيت</button>
+          </div>
+        </div>
+        <textarea class="editor-area" id="scBody" placeholder="اكتب نص السكريبت هنا...&#10;استخدم الأدوات بالأعلى لتنسيق النص وإضافة توقيتات المونتاج"></textarea>
+      </div>
+      <div class="field">
+        <label>📝 ملاحظات / وصف (اختياري)</label>
+        <textarea id="scDesc" placeholder="ملاحظات إضافية عن هذا السكريبت..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" data-close="scriptModal">إلغاء</button>
+      <button class="btn-save violet" id="saveScript">💾 حفظ</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     MODAL: VAULT
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="vaultModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="vaultModalTitle">إضافة بيانات جديدة</h2>
+      <button class="modal-close" data-close="vaultModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>🌐 اسم الموقع / الخدمة <span class="required">*</span></label>
+        <input type="text" id="vSite" placeholder="مثال: Google، Netflix، Instagram"/>
+      </div>
+      <div class="field">
+        <label>📧 الإيميل / اسم المستخدم <span class="required">*</span></label>
+        <input type="text" id="vEmail" placeholder="example@gmail.com"/>
+      </div>
+      <div class="field">
+        <label>🔑 كلمة المرور <span class="required">*</span></label>
+        <input type="password" id="vPass" placeholder="••••••••"/>
+      </div>
+      <div class="field">
+        <label>📝 ملاحظة (اختياري)</label>
+        <input type="text" id="vNote" placeholder="ملاحظة إضافية"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" data-close="vaultModal">إلغاء</button>
+      <button class="btn-save green" id="saveVault">💾 حفظ</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- IMPORT CONFIRM MODAL -->
+<div class="modal-overlay" id="importConfirmModal">
+  <div class="confirm-box">
+    <h3>📂 تأكيد الاستيراد</h3>
+    <div class="confirm-stat" id="importStats"></div>
+    <p>هل تريد استيراد هذه البيانات؟ سيتم <strong style="color:#ef4444">استبدال</strong> بياناتك الحالية بالكامل.</p>
+    <div class="confirm-btns">
+      <button class="btn-cancel" data-close="importConfirmModal">إلغاء</button>
+      <button class="btn-save" id="confirmImportBtn">✅ نعم، استيراد</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div class="ctx-menu" id="ctxMenu">
+  <button class="ctx-item" id="ctxEdit">✏️ تعديل</button>
+  <button class="ctx-item del" id="ctxDel">🗑️ حذف</button>
+</div>
+
+
+<script>
+/* ══════════════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+const KEYS = { shortcuts:'mok_shortcuts_v2', scripts:'mok_scripts_v1', vault:'mok_vault_v1' };
+
+function load(key){ try{ return JSON.parse(localStorage.getItem(key)||'[]') }catch{ return [] } }
+function save(key,data){ localStorage.setItem(key, JSON.stringify(data)) }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7) }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+
+function toast(msg, ms=2200){
+  const el=$('toast');
+  el.textContent=msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>el.classList.remove('show'), ms);
+}
+
+function lighten(hex,a=28){
+  let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `rgb(${Math.min(255,r+a)},${Math.min(255,g+a)},${Math.min(255,b+a)})`;
+}
+
+function getFavicon(url){
+  try{ return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64` }catch{ return null }
+}
+
+/* ══ TABS ══ */
+let activeTab = 'shortcuts';
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    activeTab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b===btn));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+activeTab));
+    // show correct header button
+    $('addShortcutBtn').style.display = activeTab==='shortcuts'?'':'none';
+    $('addScriptBtn').style.display   = activeTab==='scripts'?'':'none';
+    $('addVaultBtn').style.display    = activeTab==='vault'?'':'none';
+  });
+});
+
+/* ══ MODALS ══ */
+function openModal(id){ $(id).classList.add('active') }
+function closeModal(id){ $(id).classList.remove('active') }
+document.querySelectorAll('[data-close]').forEach(btn=>{
+  btn.addEventListener('click',()=>closeModal(btn.dataset.close));
+});
+document.querySelectorAll('.modal-overlay').forEach(ov=>{
+  ov.addEventListener('click',e=>{ if(e.target===ov) closeModal(ov.id) });
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal-overlay.active').forEach(m=>closeModal(m.id)) });
+
+/* ══════════════════════════════════════════════════
+   SHORTCUTS
+══════════════════════════════════════════════════ */
+let shortcuts = load(KEYS.shortcuts);
+let editShortcutId = null;
+let shortcutColor = '#6b7280';
+let dragSrc = null;
+
+function nextShortcutName(){
+  const nums = shortcuts.map(s=>s.name).filter(n=>/^مختصر #\d+$/.test(n))
+    .map(n=>parseInt(n.replace('مختصر #','')));
+  return `مختصر #${nums.length?Math.max(...nums)+1:1}`;
+}
+
+function renderShortcuts(){
+  const grid = $('shortcutsGrid');
+  [...grid.querySelectorAll('.shortcut-card')].forEach(el=>el.remove());
+  const emp = $('emptyShortcuts');
+  if(!shortcuts.length){ emp.style.display=''; return; }
+  emp.style.display='none';
+  shortcuts.forEach((s,i)=>{ grid.appendChild(buildShortcutCard(s,i)); });
+}
+
+function buildShortcutCard(s,i){
+  const card = document.createElement('div');
+  card.className='shortcut-card';
+  card.draggable=true;
+  card.dataset.id=s.id;
+  card.style.animationDelay=`${i*.05}s`;
+  const fav=getFavicon(s.url);
+  card.innerHTML=`
+    <div class="card-bar" style="background:linear-gradient(90deg,${s.color},${lighten(s.color)})"></div>
+    <div class="card-body">
+      <a class="card-link" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon" style="border-color:${s.color}44;background:${s.color}18">
+          ${fav?`<img src="${fav}" width="20" height="20" alt="" onerror="this.replaceWith(document.createTextNode('🔗'))"/>`:'🔗'}
+        </div>
+        <div class="card-info">
+          <div class="card-name">${esc(s.name)}</div>
+          <div class="card-desc">${esc(s.desc)}</div>
+        </div>
+      </a>
+    </div>
+    <div class="card-actions">
+      <button class="card-action-btn" data-act="edit">✏️</button>
+      <button class="card-action-btn del" data-act="del">🗑️</button>
+    </div>`;
+
+  // prevent drag-click conflict
+  card.querySelector('.card-link').addEventListener('click',e=>{
+    if(card.classList.contains('just-dragged')){ e.preventDefault(); card.classList.remove('just-dragged'); }
+  });
+  card.querySelectorAll('[data-act]').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      btn.dataset.act==='edit' ? openShortcutEdit(s.id) : deleteShortcut(s.id);
+    });
+  });
+  card.addEventListener('contextmenu',e=>{ e.preventDefault(); showCtx(e,s.id,'shortcut'); });
+  // Drag
+  card.addEventListener('dragstart',e=>{ dragSrc=i; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
+  card.addEventListener('dragend',()=>{ card.classList.add('just-dragged'); card.classList.remove('dragging'); clearDragOver(); setTimeout(()=>card.classList.remove('just-dragged'),200); });
+  card.addEventListener('dragover',e=>{ e.preventDefault(); if(dragSrc!==null&&dragSrc!==i){ clearDragOver(); card.classList.add('drag-over'); } });
+  card.addEventListener('drop',e=>{ e.preventDefault(); if(dragSrc!==null&&dragSrc!==i){ const m=shortcuts.splice(dragSrc,1)[0]; shortcuts.splice(i,0,m); dragSrc=null; save(KEYS.shortcuts,shortcuts); renderShortcuts(); } });
+  return card;
+}
+
+function clearDragOver(){ document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over')); }
+
+function openShortcutModal(id=null){
+  editShortcutId=id;
+  if(id){
+    const s=shortcuts.find(x=>x.id===id);
+    $('shortcutModalTitle').textContent='تعديل المختصر';
+    $('sUrl').value=s.url; $('sName').value=s.name;
+    $('sDesc').value=s.desc==='...'?'':s.desc;
+    setShortcutColor(s.color);
+  } else {
+    $('shortcutModalTitle').textContent='إضافة مختصر جديد';
+    $('sUrl').value=''; $('sName').value=''; $('sDesc').value='';
+    setShortcutColor('#6b7280');
+  }
+  openModal('shortcutModal');
+  setTimeout(()=>$('sUrl').focus(),350);
+}
+
+function openShortcutEdit(id){ openShortcutModal(id); }
+
+function setShortcutColor(c){
+  shortcutColor=c;
+  document.querySelectorAll('#shortcutColors .color-opt').forEach(o=>o.classList.toggle('selected',o.dataset.color===c));
+}
+
+document.querySelectorAll('#shortcutColors .color-opt').forEach(o=>o.addEventListener('click',()=>setShortcutColor(o.dataset.color)));
+
+$('addShortcutBtn').addEventListener('click',()=>openShortcutModal());
+$('saveShortcut').addEventListener('click',()=>{
+  let url=$('sUrl').value.trim();
+  if(!url){ $('sUrl').style.borderColor='#ef4444'; setTimeout(()=>$('sUrl').style.borderColor='',1500); $('sUrl').focus(); return; }
+  if(!/^https?:\/\//i.test(url)) url='https://'+url;
+  const name=$('sName').value.trim()||nextShortcutName();
+  const desc=$('sDesc').value.trim()||'...';
+  if(editShortcutId){
+    const s=shortcuts.find(x=>x.id===editShortcutId);
+    Object.assign(s,{url,name,desc,color:shortcutColor});
+  } else {
+    shortcuts.push({id:uid(),url,name,desc,color:shortcutColor});
+  }
+  save(KEYS.shortcuts,shortcuts);
+  closeModal('shortcutModal');
+  renderShortcuts();
+  toast(editShortcutId?'✅ تم التعديل':'✅ تم الحفظ');
+});
+
+function deleteShortcut(id){
+  const card=document.querySelector(`[data-id="${id}"]`);
+  shortcuts=shortcuts.filter(s=>s.id!==id);
+  save(KEYS.shortcuts,shortcuts);
+  if(card){
+    card.style.transition='transform .3s,opacity .3s';
+    card.style.transform='scale(.7)';card.style.opacity='0';
+    setTimeout(()=>renderShortcuts(),280);
+  } else renderShortcuts();
+  toast('🗑️ تم الحذف');
+}
+
+/* ══════════════════════════════════════════════════
+   SCRIPTS
+══════════════════════════════════════════════════ */
+let scripts = load(KEYS.scripts);
+let editScriptId = null;
+
+/* ── Toolbar commands ── */
+document.querySelectorAll('[data-cmd]').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    const ta=$('scBody');
+    const start=ta.selectionStart, end=ta.selectionEnd;
+    const sel=ta.value.slice(start,end);
+    const cmd=btn.dataset.cmd;
+    const tags={bold:['**','**'], italic:['//','//'], underline:['__','__']};
+    const [o,c]=tags[cmd];
+    const rep=o+sel+c;
+    ta.setRangeText(rep,start,end,'end');
+    ta.focus();
+  });
+});
+
+$('insertTsBtn').addEventListener('click',e=>{
+  e.preventDefault();
+  const ta=$('scBody');
+  const ts=$('tsInput').value.trim()||'--:--';
+  const tag=`[⏱ ${ts}]`;
+  const pos=ta.selectionStart;
+  ta.setRangeText(tag,pos,pos,'end');
+  $('tsInput').value='';
+  ta.focus();
+});
+
+function renderScriptContent(raw){
+  let html=esc(raw);
+  // timestamps
+  html=html.replace(/\[⏱ ([^\]]+)\]/g,'<span class="ts">⏱ $1</span>');
+  // bold
+  html=html.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+  // italic
+  html=html.replace(/\/\/(.+?)\/\//g,'<i>$1</i>');
+  // underline
+  html=html.replace(/__(.+?)__/g,'<u>$1</u>');
+  return html;
+}
+
+function renderScripts(){
+  const list=$('scriptsList');
+  list.innerHTML='';
+  if(!scripts.length){
+    list.innerHTML='<div class="empty-state"><div class="empty-icon">🎬</div><p>لا يوجد سكريبتات بعد</p><span>اضغط على "إضافة سكريبت" للبدء</span></div>';
+    return;
+  }
+  scripts.forEach((s,i)=>{
+    const card=document.createElement('div');
+    card.className='script-card';
+    card.dataset.id=s.id;
+    card.style.animationDelay=`${i*.06}s`;
+    card.innerHTML=`
+      <div class="script-header" data-toggle>
+        <span class="script-badge">🎬 سكريبت</span>
+        <span class="script-title">${esc(s.title)}</span>
+        <div class="script-actions">
+          <button class="card-action-btn" data-act="edit" title="تعديل">✏️</button>
+          <button class="card-action-btn del" data-act="del" title="حذف">🗑️</button>
+        </div>
+        <span class="script-chevron">▼</span>
+      </div>
+      <div class="script-body">
+        <div class="script-content">${renderScriptContent(s.body)}</div>
+        ${s.desc?`<div class="script-desc-area">📝 ${esc(s.desc)}</div>`:''}
+      </div>`;
+    card.querySelector('[data-toggle]').addEventListener('click',e=>{
+      if(e.target.closest('[data-act]')) return;
+      card.classList.toggle('open');
+    });
+    card.querySelectorAll('[data-act]').forEach(btn=>{
+      btn.addEventListener('click',e=>{
+        e.stopPropagation();
+        btn.dataset.act==='edit'?openScriptEdit(s.id):deleteScript(s.id);
+      });
+    });
+    list.appendChild(card);
+  });
+}
+
+function openScriptModal(id=null){
+  editScriptId=id;
+  if(id){
+    const s=scripts.find(x=>x.id===id);
+    $('scriptModalTitle').textContent='تعديل السكريبت';
+    $('scTitle').value=s.title;
+    $('scBody').value=s.body;
+    $('scDesc').value=s.desc||'';
+  } else {
+    $('scriptModalTitle').textContent='إضافة سكريبت جديد';
+    $('scTitle').value=''; $('scBody').value=''; $('scDesc').value='';
+  }
+  openModal('scriptModal');
+  setTimeout(()=>$('scTitle').focus(),350);
+}
+
+function openScriptEdit(id){ openScriptModal(id); }
+
+$('addScriptBtn').addEventListener('click',()=>openScriptModal());
+$('saveScript').addEventListener('click',()=>{
+  const title=$('scTitle').value.trim();
+  if(!title){ $('scTitle').style.borderColor='#ef4444'; setTimeout(()=>$('scTitle').style.borderColor='',1500); $('scTitle').focus(); return; }
+  const body=$('scBody').value;
+  const desc=$('scDesc').value.trim();
+  if(editScriptId){
+    const s=scripts.find(x=>x.id===editScriptId);
+    Object.assign(s,{title,body,desc});
+  } else {
+    scripts.push({id:uid(),title,body,desc});
+  }
+  save(KEYS.scripts,scripts);
+  closeModal('scriptModal');
+  renderScripts();
+  toast(editScriptId?'✅ تم التعديل':'✅ تم الحفظ');
+});
+
+function deleteScript(id){
+  scripts=scripts.filter(s=>s.id!==id);
+  save(KEYS.scripts,scripts);
+  renderScripts();
+  toast('🗑️ تم الحذف');
+}
+
+/* ══════════════════════════════════════════════════
+   VAULT
+══════════════════════════════════════════════════ */
+let vault = load(KEYS.vault);
+let editVaultId = null;
+
+function renderVault(){
+  const grid=$('vaultGrid');
+  grid.innerHTML='';
+  if(!vault.length){
+    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔐</div><p>الخزنة فارغة</p><span>اضغط على "إضافة بيانات" للبدء</span></div>';
+    return;
+  }
+  vault.forEach((v,i)=>{
+    const card=document.createElement('div');
+    card.className='vault-card';
+    card.style.animationDelay=`${i*.06}s`;
+    card.dataset.id=v.id;
+    card.innerHTML=`
+      <div class="vault-card-header">
+        <div class="vault-icon">🌐</div>
+        <span class="vault-site">${esc(v.site)}</span>
+      </div>
+      <div class="vault-email-row">
+        <span class="vault-label">📧</span>
+        <span class="vault-val" id="ve-${v.id}">${esc(v.email)}</span>
+        <button class="vault-copy-btn" data-copy="email" title="نسخ الإيميل">📋</button>
+      </div>
+      <div class="vault-pass-row">
+        <span class="vault-label">🔑</span>
+        <span class="vault-val pass-hidden" id="vp-${v.id}" data-shown="0">••••••••</span>
+        <button class="vault-toggle-btn" data-toggle-pass title="إظهار/إخفاء">👁</button>
+        <button class="vault-copy-btn" data-copy="pass" title="نسخ كلمة المرور">📋</button>
+      </div>
+      ${v.note?`<div style="font-size:.78rem;color:var(--muted);margin-top:8px;padding:6px 8px;background:var(--bg);border-radius:7px;border:1px solid var(--border)">📝 ${esc(v.note)}</div>`:''}
+      <div class="vault-card-actions">
+        <button class="card-action-btn" data-act="edit">✏️</button>
+        <button class="card-action-btn del" data-act="del">🗑️</button>
+      </div>`;
+    // toggle password
+    card.querySelector('[data-toggle-pass]').addEventListener('click',()=>{
+      const span=document.getElementById(`vp-${v.id}`);
+      const shown=span.dataset.shown==='1';
+      span.textContent=shown?'••••••••':v.pass;
+      span.classList.toggle('pass-hidden',shown);
+      span.dataset.shown=shown?'0':'1';
+    });
+    // copy
+    card.querySelectorAll('[data-copy]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const val=btn.dataset.copy==='email'?v.email:v.pass;
+        navigator.clipboard.writeText(val).then(()=>toast('📋 تم النسخ')).catch(()=>toast('تعذّر النسخ'));
+      });
+    });
+    card.querySelectorAll('[data-act]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        btn.dataset.act==='edit'?openVaultEdit(v.id):deleteVault(v.id);
+      });
+    });
+    grid.appendChild(card);
+  });
+}
+
+function openVaultModal(id=null){
+  editVaultId=id;
+  if(id){
+    const v=vault.find(x=>x.id===id);
+    $('vaultModalTitle').textContent='تعديل البيانات';
+    $('vSite').value=v.site; $('vEmail').value=v.email;
+    $('vPass').value=v.pass; $('vNote').value=v.note||'';
+  } else {
+    $('vaultModalTitle').textContent='إضافة بيانات جديدة';
+    $('vSite').value=''; $('vEmail').value=''; $('vPass').value=''; $('vNote').value='';
+  }
+  openModal('vaultModal');
+  setTimeout(()=>$('vSite').focus(),350);
+}
+
+function openVaultEdit(id){ openVaultModal(id); }
+
+$('addVaultBtn').addEventListener('click',()=>openVaultModal());
+$('saveVault').addEventListener('click',()=>{
+  const site=$('vSite').value.trim();
+  const email=$('vEmail').value.trim();
+  const pass=$('vPass').value;
+  if(!site||!email||!pass){
+    [['vSite',site],['vEmail',email],['vPass',pass]].forEach(([id,v])=>{
+      if(!v){ $(id).style.borderColor='#ef4444'; setTimeout(()=>$(id).style.borderColor='',1500); }
+    });
+    return;
+  }
+  const note=$('vNote').value.trim();
+  if(editVaultId){
+    const v=vault.find(x=>x.id===editVaultId);
+    Object.assign(v,{site,email,pass,note});
+  } else {
+    vault.push({id:uid(),site,email,pass,note});
+  }
+  save(KEYS.vault,vault);
+  closeModal('vaultModal');
+  renderVault();
+  toast(editVaultId?'✅ تم التعديل':'✅ تم الحفظ');
+});
+
+function deleteVault(id){
+  vault=vault.filter(v=>v.id!==id);
+  save(KEYS.vault,vault);
+  renderVault();
+  toast('🗑️ تم الحذف');
+}
+
+/* ══════════════════════════════════════════════════
+   CONTEXT MENU (shortcuts only)
+══════════════════════════════════════════════════ */
+let ctxTargetId=null;
+function showCtx(e,id,type){
+  ctxTargetId={id,type};
+  const cm=$('ctxMenu');
+  cm.style.top=`${e.clientY}px`;
+  cm.style.left=`${e.clientX}px`;
+  cm.classList.add('active');
+  requestAnimationFrame(()=>{
+    const r=cm.getBoundingClientRect();
+    if(r.right>window.innerWidth) cm.style.left=`${e.clientX-r.width}px`;
+    if(r.bottom>window.innerHeight) cm.style.top=`${e.clientY-r.height}px`;
+  });
+}
+function hideCtx(){ $('ctxMenu').classList.remove('active'); ctxTargetId=null; }
+
+$('ctxEdit').addEventListener('click',()=>{ if(ctxTargetId){ openShortcutEdit(ctxTargetId.id); hideCtx(); } });
+$('ctxDel').addEventListener('click',()=>{ if(ctxTargetId){ deleteShortcut(ctxTargetId.id); hideCtx(); } });
+document.addEventListener('click',hideCtx);
+document.addEventListener('contextmenu',e=>{ if(!e.target.closest('.shortcut-card')) hideCtx(); });
+
+/* ══════════════════════════════════════════════════
+   BACKUP — EXPORT & IMPORT
+══════════════════════════════════════════════════ */
+let pendingImport = null;
+
+function exportBackup(){
+  const data = {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    shortcuts: load(KEYS.shortcuts),
+    scripts:   load(KEYS.scripts),
+    vault:     load(KEYS.vault)
+  };
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toLocaleDateString('ar-EG').replace(/\//g,'-');
+  a.href     = url;
+  a.download = `مختصراتي-نسخة-${date}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('💾 تم تصدير النسخة الاحتياطية بنجاح!', 2800);
+}
+
+$('exportBtn').addEventListener('click', exportBackup);
+
+$('importBtn').addEventListener('click', () => $('importFile').click());
+
+$('importFile').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if(!data.version || !Array.isArray(data.shortcuts)) throw new Error('ملف غير صالح');
+      pendingImport = data;
+      // show stats
+      const stats = $('importStats');
+      stats.innerHTML = `
+        <div class="confirm-stat-item"><div class="csn">${data.shortcuts.length}</div><div class="csl">🔗 مختصر</div></div>
+        <div class="confirm-stat-item"><div class="csn">${(data.scripts||[]).length}</div><div class="csl">🎬 سكريبت</div></div>
+        <div class="confirm-stat-item"><div class="csn">${(data.vault||[]).length}</div><div class="csl">🔐 بيانات</div></div>
+      `;
+      openModal('importConfirmModal');
+    } catch {
+      toast('❌ الملف غير صالح أو تالف!', 3000);
+    }
+    e.target.value = ''; // reset input
+  };
+  reader.readAsText(file);
+});
+
+$('confirmImportBtn').addEventListener('click', () => {
+  if(!pendingImport) return;
+  save(KEYS.shortcuts, pendingImport.shortcuts || []);
+  save(KEYS.scripts,   pendingImport.scripts   || []);
+  save(KEYS.vault,     pendingImport.vault      || []);
+  shortcuts = load(KEYS.shortcuts);
+  scripts   = load(KEYS.scripts);
+  vault     = load(KEYS.vault);
+  closeModal('importConfirmModal');
+  pendingImport = null;
+  renderShortcuts();
+  renderScripts();
+  renderVault();
+  toast('✅ تم الاستيراد بنجاح!', 2800);
+});
+
+/* ══ INIT ══ */
+renderShortcuts();
+renderScripts();
+renderVault();
+</script>
 </body>
 </html>
