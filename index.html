@@ -3,171 +3,67 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<title>مختصراتي</title>
+<meta name="description" content="تطبيق مختصراتي — روابطك وسكريبتاتك وبياناتك ومهامك في مكان واحد"/>
+<meta name="theme-color" content="#080e1c"/>
+<title>مختصراتي ⚡</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
 <style>
-/* ══ RESET & ROOT ══ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:      #080e1c;
-  --bg-card: #0c1528;
-  --bg-card2:#101e36;
-  --border:  #1a3352;
-  --bhl:     #2563eb44;
-  --txt:     #ddeaf8;
-  --muted:   #5a7ca0;
-  --accent:  #3b82f6;
-  --accent2: #06b6d4;
-  --rad:     14px;
+  --bg:#080e1c;--bg-card:#0c1528;--bg-card2:#101e36;--border:#1a3352;--bhl:#2563eb44;
+  --txt:#ddeaf8;--muted:#5a7ca0;--accent:#3b82f6;--accent2:#06b6d4;--rad:14px;
+}
+[data-theme="light"]{
+  --bg:#f0f4f8;--bg-card:#ffffff;--bg-card2:#e8eef5;--border:#c8d8e8;--bhl:#2563eb22;
+  --txt:#1a2a3a;--muted:#5a7ca0;--accent:#2563eb;--accent2:#0891b2;
 }
 html{scroll-behavior:smooth}
-body{
-  font-family:'Cairo',sans-serif;
-  background:var(--bg);color:var(--txt);
-  min-height:100vh;overflow-x:hidden;direction:rtl;
-}
-
-/* ══ BG ══ */
-.bg-grid{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(#1e3a5f1a 1px,transparent 1px),
-                   linear-gradient(90deg,#1e3a5f1a 1px,transparent 1px);
-  background-size:44px 44px;
-}
-.bg-glow{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 55% 45% at 25% 15%,#1e3fad1e 0%,transparent 65%),
-    radial-gradient(ellipse 45% 35% at 80% 80%,#0e749018 0%,transparent 55%);
-}
-
-/* ══ LAYOUT ══ */
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;direction:rtl;transition:background .3s,color .3s}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(#1e3a5f1a 1px,transparent 1px),linear-gradient(90deg,#1e3a5f1a 1px,transparent 1px);background-size:44px 44px}
+[data-theme="light"] .bg-grid{background-image:linear-gradient(#2563eb0d 1px,transparent 1px),linear-gradient(90deg,#2563eb0d 1px,transparent 1px)}
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 45% at 25% 15%,#1e3fad1e 0%,transparent 65%),radial-gradient(ellipse 45% 35% at 80% 80%,#0e749018 0%,transparent 55%)}
 .container{position:relative;z-index:1;max-width:1140px;margin:0 auto;padding:36px 20px 100px}
-
-/* ══ HEADER ══ */
-.header{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;margin-bottom:36px;
-  animation:fadeDown .6s ease both;
-}
+.header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:36px;animation:fadeDown .6s ease both}
 .header-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .logo{font-size:2rem;filter:drop-shadow(0 0 12px #3b82f688);animation:pulse-logo 3s ease-in-out infinite}
 @keyframes pulse-logo{0%,100%{filter:drop-shadow(0 0 12px #3b82f688)}50%{filter:drop-shadow(0 0 24px #06b6d4cc)}}
-.header h1{
-  font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;
-  background:linear-gradient(135deg,#93c5fd,#38bdf8,#a78bfa);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+.header h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;background:linear-gradient(135deg,#93c5fd,#38bdf8,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+[data-theme="light"] .header h1{background:linear-gradient(135deg,#1d4ed8,#0891b2,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .subtitle{font-size:.88rem;color:var(--muted);margin-top:2px;width:100%}
-.header-actions{display:flex;gap:10px;flex-wrap:wrap}
-
-/* ══ BUTTONS ══ */
-.add-btn{
-  position:relative;display:flex;align-items:center;gap:9px;
-  padding:12px 24px;border-radius:50px;border:1px solid #3b82f644;
-  font-family:inherit;font-size:.98rem;font-weight:700;color:#fff;cursor:pointer;
-  overflow:hidden;transition:transform .2s,box-shadow .2s;
-}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.settings-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card2);color:var(--muted);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.settings-btn:hover{color:var(--txt);border-color:var(--accent)}
+.add-btn{position:relative;display:flex;align-items:center;gap:9px;padding:10px 20px;border-radius:50px;border:1px solid transparent;font-family:inherit;font-size:.92rem;font-weight:700;color:#fff;cursor:pointer;overflow:hidden;transition:transform .2s,box-shadow .2s}
 .add-btn.blue{background:linear-gradient(135deg,#1d4ed8,#0e7490);box-shadow:0 4px 18px #1d4ed844}
-.add-btn.violet{background:linear-gradient(135deg,#6d28d9,#7c3aed);box-shadow:0 4px 18px #6d28d944;border-color:#7c3aed44}
-.add-btn.green{background:linear-gradient(135deg,#065f46,#0891b2);box-shadow:0 4px 18px #06564644;border-color:#10b98144}
-.add-btn.amber{background:linear-gradient(135deg,#92400e,#b45309);box-shadow:0 4px 18px #92400e44;border-color:#f59e0b44}
-
-/* ══ BACKUP BAR ══ */
-.backup-bar{
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  padding:13px 18px;margin-bottom:26px;
-  background:linear-gradient(135deg,#0c1a30,#0f2040);
-  border:1px solid #1e3a5f;border-radius:14px;
-  animation:fadeDown .6s .05s ease both;
-}
-.backup-bar-label{
-  font-size:.82rem;font-weight:700;color:var(--muted);
-  display:flex;align-items:center;gap:6px;margin-left:auto;
-}
-.backup-bar-label span{color:#38bdf8}
-.backup-btn{
-  display:flex;align-items:center;gap:7px;
-  padding:9px 18px;border-radius:30px;border:none;
-  font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;
-  transition:transform .2s,box-shadow .2s,filter .2s;position:relative;overflow:hidden;
-}
-.backup-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ffffff15,transparent 55%);pointer-events:none}
-.backup-btn:hover{transform:translateY(-2px) scale(1.04)}
-.backup-btn:active{transform:scale(.96)}
-.backup-btn.export{
-  background:linear-gradient(135deg,#1e3a8a,#1d4ed8);
-  color:#fff;box-shadow:0 4px 16px #1e3a8a55;
-}
-.backup-btn.import{
-  background:linear-gradient(135deg,#064e3b,#065f46);
-  color:#fff;box-shadow:0 4px 16px #06503b55;
-}
-.backup-btn .bico{font-size:1rem}
-
-/* ══ IMPORT CONFIRM MODAL ══ */
-.confirm-box{
-  background:var(--bg-card);border:1px solid var(--border);border-radius:16px;
-  padding:28px 24px;max-width:400px;width:100%;
-  box-shadow:0 24px 60px #00000099;
-  transform:translateY(30px) scale(.96);
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
-}
-.modal-overlay.active .confirm-box{transform:translateY(0) scale(1)}
-.confirm-box h3{font-size:1.05rem;font-weight:700;margin-bottom:10px}
-.confirm-box p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
-.confirm-btns{display:flex;gap:10px;justify-content:flex-end}
-.confirm-stat{
-  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;
-}
-.confirm-stat-item{
-  flex:1;min-width:90px;padding:10px;border-radius:10px;
-  background:var(--bg);border:1px solid var(--border);text-align:center;
-}
-.confirm-stat-item .csn{font-size:1.3rem;font-weight:900;color:var(--txt)}
-.confirm-stat-item .csl{font-size:.72rem;color:var(--muted);margin-top:2px}
-.add-btn:hover{transform:translateY(-3px) scale(1.03)}
-.add-btn:active{transform:translateY(0) scale(.97)}
-.add-btn-icon{font-size:1.3rem;font-weight:900;transition:transform .3s;line-height:1}
+.add-btn.violet{background:linear-gradient(135deg,#6d28d9,#7c3aed);box-shadow:0 4px 18px #6d28d944}
+.add-btn.green{background:linear-gradient(135deg,#065f46,#0891b2);box-shadow:0 4px 18px #06564644}
+.add-btn.amber{background:linear-gradient(135deg,#92400e,#b45309);box-shadow:0 4px 18px #92400e44}
+.add-btn.rose{background:linear-gradient(135deg,#9f1239,#be185d);box-shadow:0 4px 18px #9f123944}
+.add-btn:hover{transform:translateY(-2px) scale(1.03)}
+.add-btn:active{transform:scale(.97)}
+.add-btn-icon{font-size:1.2rem;font-weight:900;transition:transform .3s;line-height:1}
 .add-btn:hover .add-btn-icon{transform:rotate(90deg)}
-.add-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ffffff18,transparent 55%);pointer-events:none}
-
-/* ══ TABS ══ */
-.tabs{display:flex;gap:6px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:0;animation:fadeDown .6s .1s ease both;overflow-x:auto}
-.tab-btn{
-  padding:10px 20px;border:none;background:none;color:var(--muted);
-  font-family:inherit;font-size:.93rem;font-weight:600;cursor:pointer;
-  border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;
-  margin-bottom:-1px;
-}
+.backup-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;margin-bottom:26px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;animation:fadeDown .6s .05s ease both}
+.backup-bar-label{font-size:.78rem;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:6px;margin-left:auto}
+.backup-bar-label span{color:#38bdf8}
+.backup-btn{display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:30px;border:none;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;transition:transform .2s}
+.backup-btn:hover{transform:translateY(-2px)}
+.backup-btn.export{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#fff}
+.backup-btn.import{background:linear-gradient(135deg,#064e3b,#065f46);color:#fff}
+.tabs{display:flex;gap:0;margin-bottom:28px;border-bottom:1px solid var(--border);overflow-x:auto;animation:fadeDown .6s .1s ease both}
+.tab-btn{padding:10px 18px;border:none;background:none;color:var(--muted);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;margin-bottom:-1px}
 .tab-btn.active{color:var(--txt);border-bottom-color:var(--accent)}
 .tab-btn:hover:not(.active){color:var(--txt)}
 .tab-panel{display:none}.tab-panel.active{display:block}
-
-/* ══ SHORTCUTS GRID ══ */
-.shortcuts-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(195px,1fr));
-  gap:14px;min-height:180px;
-}
-.empty-state{
-  grid-column:1/-1;text-align:center;padding:70px 20px;
-  color:var(--muted);animation:fadeIn .5s ease;
-}
+/* SHORTCUTS */
+.shortcuts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px;min-height:180px}
+.empty-state{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted);animation:fadeIn .5s ease}
 .empty-icon{font-size:3rem;margin-bottom:12px;opacity:.45}
 .empty-state p{font-size:1rem;font-weight:600;margin-bottom:4px}
 .empty-state span{font-size:.85rem;opacity:.65}
-
-/* ══ SHORTCUT CARD ══ */
-.shortcut-card{
-  position:relative;border-radius:var(--rad);
-  background:var(--bg-card);border:1px solid var(--border);
-  overflow:hidden;cursor:grab;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
-  animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;
-}
+.shortcut-card{position:relative;border-radius:var(--rad);background:var(--bg-card);border:1px solid var(--border);overflow:hidden;cursor:grab;transition:transform .25s,box-shadow .25s,border-color .25s;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
 .shortcut-card:hover{transform:translateY(-4px) scale(1.02);border-color:var(--bhl);box-shadow:0 12px 36px #00000055}
 .shortcut-card.dragging{opacity:.45;transform:scale(.93);cursor:grabbing;z-index:999}
 .shortcut-card.drag-over{border-color:#3b82f6;box-shadow:0 0 0 2px #3b82f655}
@@ -175,241 +71,204 @@ body{
 .shortcut-card:hover .card-bar{height:6px}
 .card-body{padding:16px 14px 12px}
 .card-link{display:flex;align-items:flex-start;gap:10px;text-decoration:none;color:inherit;outline:none}
-.card-icon{
-  width:38px;height:38px;border-radius:9px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:1rem;
-  background:var(--bg-card2);border:1px solid var(--border);transition:transform .2s;
-}
+.card-icon{width:38px;height:38px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1rem;background:var(--bg-card2);border:1px solid var(--border);transition:transform .2s}
 .shortcut-card:hover .card-icon{transform:scale(1.1) rotate(-5deg)}
 .card-info{flex:1;min-width:0}
 .card-name{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
 .card-desc{font-size:.75rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-actions{display:flex;gap:5px;padding:6px 14px 10px;opacity:0;transition:opacity .2s;justify-content:flex-end}
 .shortcut-card:hover .card-actions{opacity:1}
-.card-action-btn{
-  width:28px;height:28px;border-radius:7px;border:1px solid var(--border);
-  background:var(--bg-card2);color:var(--muted);font-size:.8rem;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;
-}
-.card-action-btn:hover{color:var(--txt);border-color:var(--accent);background:#1e3a5f44}
+.card-action-btn{width:28px;height:28px;border-radius:7px;border:1px solid var(--border);background:var(--bg-card2);color:var(--muted);font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.card-action-btn:hover{color:var(--txt);border-color:var(--accent)}
 .card-action-btn.del:hover{color:#ef4444;border-color:#ef4444}
-
-/* ══ SCRIPT CARDS ══ */
+/* SCRIPTS */
 .scripts-list{display:flex;flex-direction:column;gap:12px}
-.script-card{
-  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rad);
-  overflow:hidden;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;
-  transition:border-color .2s;
-}
+.script-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rad);overflow:hidden;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;transition:border-color .2s}
 .script-card:hover{border-color:var(--bhl)}
-.script-header{
-  display:flex;align-items:center;gap:12px;padding:14px 16px;
-  cursor:pointer;background:var(--bg-card2);
-}
-.script-badge{
-  padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;
-  background:#7c3aed22;color:#a78bfa;border:1px solid #7c3aed44;flex-shrink:0;
-}
+.script-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;background:var(--bg-card2)}
+.script-badge{padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;background:#7c3aed22;color:#a78bfa;border:1px solid #7c3aed44;flex-shrink:0}
 .script-title{flex:1;font-weight:700;font-size:.95rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .script-chevron{color:var(--muted);font-size:.8rem;transition:transform .3s;flex-shrink:0}
 .script-card.open .script-chevron{transform:rotate(180deg)}
 .script-actions{display:flex;gap:6px;flex-shrink:0}
 .script-body{display:none;padding:16px}
 .script-card.open .script-body{display:block}
-
-/* ── Script content ── */
-.script-content{
-  font-size:.9rem;line-height:1.85;color:var(--txt);
-  white-space:pre-wrap;word-break:break-word;
-}
-.script-content .ts{
-  display:inline-flex;align-items:center;gap:5px;
-  background:#06b6d422;color:#38bdf8;border:1px solid #06b6d433;
-  border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700;
-  margin:0 3px;cursor:default;user-select:none;
-}
-.script-content b{font-weight:800;color:#fff}
+.script-content{font-size:.9rem;line-height:1.85;color:var(--txt);white-space:pre-wrap;word-break:break-word}
+.script-content .ts{display:inline-flex;align-items:center;gap:5px;background:#06b6d422;color:#38bdf8;border:1px solid #06b6d433;border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:700;margin:0 3px;cursor:default;user-select:none}
+.script-content b{font-weight:800;color:var(--txt)}
 .script-content i{color:#a78bfa;font-style:normal}
 .script-content u{text-decoration:underline;text-decoration-color:#3b82f666}
 .script-desc-area{font-size:.82rem;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
-
-/* ══ VAULT CARDS ══ */
+/* VAULT */
 .vault-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.vault-card{
-  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rad);
-  padding:16px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;
-  transition:border-color .2s,box-shadow .2s;
-}
+.vault-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rad);padding:16px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;transition:border-color .2s,box-shadow .2s}
 .vault-card:hover{border-color:var(--bhl);box-shadow:0 8px 28px #00000044}
 .vault-card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.vault-icon{
-  width:36px;height:36px;border-radius:9px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-  background:linear-gradient(135deg,#065f4622,#0891b222);border:1px solid #10b98133;
-}
+.vault-icon{width:36px;height:36px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:linear-gradient(135deg,#065f4622,#0891b222);border:1px solid #10b98133}
 .vault-site{font-weight:700;font-size:.95rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.vault-email-row,.vault-pass-row{
-  display:flex;align-items:center;gap:8px;
-  padding:8px 10px;border-radius:8px;
-  background:var(--bg);border:1px solid var(--border);margin-bottom:6px;
-}
+.vault-email-row,.vault-pass-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:var(--bg);border:1px solid var(--border);margin-bottom:6px}
 .vault-label{font-size:.72rem;color:var(--muted);font-weight:700;flex-shrink:0;min-width:40px}
 .vault-val{flex:1;font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .vault-val.pass-hidden{letter-spacing:3px;font-size:1rem;color:var(--muted)}
-.vault-copy-btn,.vault-toggle-btn{
-  width:26px;height:26px;border-radius:6px;flex-shrink:0;
-  border:1px solid var(--border);background:var(--bg-card2);
-  color:var(--muted);font-size:.8rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:all .15s;
-}
+.vault-copy-btn,.vault-toggle-btn{width:26px;height:26px;border-radius:6px;flex-shrink:0;border:1px solid var(--border);background:var(--bg-card2);color:var(--muted);font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .vault-copy-btn:hover{color:var(--accent);border-color:var(--accent)}
 .vault-toggle-btn:hover{color:var(--txt);border-color:var(--txt)}
 .vault-card-actions{display:flex;gap:6px;justify-content:flex-end;margin-top:8px}
-
-/* ══ MODAL ══ */
-.modal-overlay{
-  position:fixed;inset:0;z-index:1000;
-  background:#000000bb;backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;
-  padding:16px;opacity:0;pointer-events:none;transition:opacity .3s;
-}
+/* TASKS */
+.tasks-container{display:flex;flex-direction:column;gap:16px}
+.tasks-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:4px}
+.tasks-filter{display:flex;gap:4px}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:var(--bg-card2);color:var(--muted);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s}
+.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tasks-stats{display:flex;gap:10px;flex-wrap:wrap}
+.task-stat{padding:6px 14px;border-radius:20px;background:var(--bg-card);border:1px solid var(--border);font-size:.8rem;color:var(--muted);font-weight:600}
+.task-stat span{color:var(--txt);font-weight:800}
+.tasks-list{display:flex;flex-direction:column;gap:8px}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;transition:all .2s;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
+.task-item:hover{border-color:var(--bhl)}
+.task-item.done{opacity:.55}
+.task-item.done .task-text{text-decoration:line-through;color:var(--muted)}
+.task-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .2s;margin-top:1px}
+.task-check:hover{border-color:var(--accent)}
+.task-item.done .task-check{background:var(--accent);border-color:var(--accent);color:#fff}
+.task-body{flex:1;min-width:0}
+.task-text{font-size:.92rem;font-weight:600;line-height:1.5;word-break:break-word}
+.task-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px;align-items:center}
+.task-prio{padding:2px 9px;border-radius:12px;font-size:.72rem;font-weight:700}
+.task-prio.high{background:#ef444422;color:#f87171;border:1px solid #ef444433}
+.task-prio.med{background:#f59e0b22;color:#fbbf24;border:1px solid #f59e0b33}
+.task-prio.low{background:#10b98122;color:#34d399;border:1px solid #10b98133}
+[data-theme="light"] .task-prio.high{background:#fee2e2;color:#dc2626;border:1px solid #fca5a5}
+[data-theme="light"] .task-prio.med{background:#fef3c7;color:#d97706;border:1px solid #fcd34d}
+[data-theme="light"] .task-prio.low{background:#d1fae5;color:#059669;border:1px solid #6ee7b7}
+.task-cat{padding:2px 9px;border-radius:12px;font-size:.72rem;font-weight:600;background:var(--bg-card2);color:var(--muted);border:1px solid var(--border)}
+.task-timer-badge{display:flex;align-items:center;gap:4px;padding:2px 9px;border-radius:12px;font-size:.72rem;font-weight:700;background:#3b82f622;color:#60a5fa;border:1px solid #3b82f633}
+[data-theme="light"] .task-timer-badge{background:#dbeafe;color:#2563eb;border:1px solid #93c5fd}
+.task-timer-badge.running{background:#10b98122;color:#34d399;border-color:#10b98133;animation:pulse-t .8s ease-in-out infinite}
+.task-timer-badge.expired{background:#ef444422;color:#f87171;border-color:#ef444433}
+[data-theme="light"] .task-timer-badge.expired{background:#fee2e2;color:#dc2626;border-color:#fca5a5}
+@keyframes pulse-t{0%,100%{opacity:1}50%{opacity:.55}}
+.task-due{font-size:.75rem;color:var(--muted)}
+.task-due.overdue{color:#f87171}
+.task-actions{display:flex;gap:4px;flex-shrink:0}
+/* COUNTDOWN */
+.countdown-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:20px}
+.countdown-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:border-color .2s}
+.countdown-card:hover{border-color:var(--bhl)}
+.countdown-card-title{font-size:.95rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.countdown-display{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.cd-unit{text-align:center;background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:8px 14px;min-width:60px}
+.cd-num{font-size:1.6rem;font-weight:900;line-height:1;background:linear-gradient(135deg,#93c5fd,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+[data-theme="light"] .cd-num{background:linear-gradient(135deg,#1d4ed8,#0891b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.countdown-card.expired-cd .cd-num{background:linear-gradient(135deg,#f87171,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cd-expired-msg{text-align:center;color:#f87171;font-size:.9rem;font-weight:700;padding:12px 0}
+.cd-label{font-size:.7rem;color:var(--muted);margin-top:4px}
+.countdown-card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
+.cd-sub{font-size:.75rem;color:var(--muted)}
+/* SETTINGS */
+.settings-section{margin-bottom:22px}
+.settings-section-title{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.theme-options{display:flex;gap:10px}
+.theme-opt{flex:1;padding:14px;border-radius:12px;border:2px solid var(--border);cursor:pointer;text-align:center;transition:all .2s;background:var(--bg-card2)}
+.theme-opt:hover{border-color:var(--muted)}
+.theme-opt.selected{border-color:var(--accent);background:var(--bg-card2)}
+.theme-opt-icon{font-size:1.5rem;margin-bottom:6px}
+.theme-opt-label{font-size:.82rem;font-weight:600;color:var(--muted)}
+.theme-opt.selected .theme-opt-label{color:var(--accent)}
+.lang-options{display:flex;gap:8px}
+.lang-opt{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);cursor:pointer;text-align:center;transition:all .2s;background:var(--bg-card2);font-family:inherit;font-size:.88rem;font-weight:600;color:var(--muted)}
+.lang-opt:hover{border-color:var(--muted)}
+.lang-opt.selected{border-color:var(--accent);color:var(--accent)}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:#000000bb;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-overlay.active{opacity:1;pointer-events:all}
-.modal{
-  width:100%;max-width:520px;max-height:92vh;overflow-y:auto;
-  background:var(--bg-card);border:1px solid var(--border);
-  border-radius:20px;box-shadow:0 24px 60px #00000099;
-  transform:translateY(30px) scale(.96);
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
-}
+.modal{width:100%;max-width:520px;max-height:92vh;overflow-y:auto;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 60px #00000099;transform:translateY(30px) scale(.96);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .modal-overlay.active .modal{transform:translateY(0) scale(1)}
-.modal-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:20px 22px 16px;border-bottom:1px solid var(--border);
-  background:linear-gradient(135deg,#0c1528,#101e36);
-  position:sticky;top:0;z-index:5;
-}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 16px;border-bottom:1px solid var(--border);background:var(--bg-card2);position:sticky;top:0;z-index:5;border-radius:20px 20px 0 0}
 .modal-header h2{font-size:1.1rem;font-weight:700}
-.modal-close{
-  width:30px;height:30px;border-radius:50%;border:1px solid var(--border);
-  background:var(--bg-card2);color:var(--muted);font-size:.9rem;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;
-}
+.modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--muted);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .modal-close:hover{color:#ef4444;border-color:#ef4444;background:#ef444411}
 .modal-body{padding:18px 22px}
-.modal-footer{
-  display:flex;gap:10px;justify-content:flex-end;
-  padding:14px 22px 20px;border-top:1px solid var(--border);
-  position:sticky;bottom:0;background:var(--bg-card);z-index:5;
-}
-
-/* ── Fields ── */
+.modal-footer{display:flex;gap:10px;justify-content:flex-end;padding:14px 22px 20px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--bg-card);z-index:5;border-radius:0 0 20px 20px}
 .field{margin-bottom:16px}
 .field label{display:block;font-size:.83rem;font-weight:600;color:var(--muted);margin-bottom:6px}
-.field input,.field textarea,.field select{
-  width:100%;padding:10px 13px;
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:9px;color:var(--txt);
-  font-family:inherit;font-size:.92rem;
-  transition:border-color .2s,box-shadow .2s;outline:none;
-}
+.field input,.field textarea,.field select{width:100%;padding:10px 13px;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--txt);font-family:inherit;font-size:.92rem;transition:border-color .2s,box-shadow .2s;outline:none}
 .field textarea{resize:vertical;min-height:90px;line-height:1.7}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #3b82f620}
 .field input::placeholder,.field textarea::placeholder{color:#304d6a}
+[data-theme="light"] .field input::placeholder,[data-theme="light"] .field textarea::placeholder{color:#94a3b8}
 .required{color:#ef4444}
 .field select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a7ca0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 12px center}
-
-/* ── Script Editor Toolbar ── */
-.editor-toolbar{
-  display:flex;flex-wrap:wrap;gap:5px;padding:8px;
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:9px 9px 0 0;border-bottom:none;
-}
-.toolbar-btn{
-  padding:5px 10px;border-radius:6px;border:1px solid var(--border);
-  background:var(--bg-card2);color:var(--txt);font-family:inherit;
-  font-size:.8rem;cursor:pointer;transition:all .15s;white-space:nowrap;
-}
-.toolbar-btn:hover{background:#1e3a5f;border-color:var(--accent)}
-.toolbar-sep{width:1px;background:var(--border);margin:0 3px;align-self:stretch}
-.ts-input-row{display:flex;gap:6px;align-items:center;width:100%}
-.ts-input-row input{
-  flex:1;padding:5px 9px;background:var(--bg);border:1px solid var(--border);
-  border-radius:6px;color:var(--txt);font-family:inherit;font-size:.82rem;outline:none;
-}
-.ts-input-row input:focus{border-color:var(--accent2)}
-.field .editor-area{
-  border-radius:0 0 9px 9px;border:1px solid var(--border);border-top:none;
-  padding:10px 13px;background:var(--bg);color:var(--txt);
-  font-family:inherit;font-size:.92rem;min-height:120px;
-  resize:vertical;outline:none;width:100%;line-height:1.7;
-  transition:border-color .2s,box-shadow .2s;
-}
-.field .editor-area:focus{border-color:var(--accent);box-shadow:0 0 0 3px #3b82f620}
-
-/* ── Color Picker ── */
 .color-picker{display:flex;flex-wrap:wrap;gap:9px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:9px}
 .color-opt{width:30px;height:30px;border-radius:50%;cursor:pointer;transition:transform .2s,box-shadow .2s;border:3px solid transparent;position:relative;flex-shrink:0}
 .color-opt:hover{transform:scale(1.2)}
 .color-opt.selected{border-color:#fff;box-shadow:0 0 0 2px #ffffff44,0 4px 12px #00000066;transform:scale(1.15)}
 .color-opt.selected::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78rem;font-weight:700}
-
-/* ── Buttons ── */
-.btn-cancel{
-  padding:9px 20px;border-radius:9px;border:1px solid var(--border);
-  background:var(--bg-card2);color:var(--muted);
-  font-family:inherit;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .15s;
-}
+.btn-cancel{padding:9px 20px;border-radius:9px;border:1px solid var(--border);background:var(--bg-card2);color:var(--muted);font-family:inherit;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .15s}
 .btn-cancel:hover{color:var(--txt);border-color:var(--muted)}
-.btn-save{
-  padding:9px 24px;border-radius:9px;border:none;
-  background:linear-gradient(135deg,#1d4ed8,#0e7490);
-  color:#fff;font-family:inherit;font-size:.92rem;font-weight:700;
-  cursor:pointer;transition:all .2s;box-shadow:0 4px 14px #1d4ed844;
-}
+.btn-save{padding:9px 24px;border-radius:9px;border:none;background:linear-gradient(135deg,#1d4ed8,#0e7490);color:#fff;font-family:inherit;font-size:.92rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px #1d4ed844}
 .btn-save:hover{transform:translateY(-2px);box-shadow:0 6px 20px #1d4ed866}
 .btn-save.violet{background:linear-gradient(135deg,#6d28d9,#7c3aed);box-shadow:0 4px 14px #6d28d944}
 .btn-save.green{background:linear-gradient(135deg,#065f46,#0891b2);box-shadow:0 4px 14px #06564644}
-
-/* ══ CONTEXT MENU ══ */
-.ctx-menu{
-  position:fixed;z-index:2000;background:var(--bg-card);border:1px solid var(--border);
-  border-radius:10px;padding:5px;box-shadow:0 8px 28px #00000077;
-  opacity:0;pointer-events:none;transform:scale(.9);transition:opacity .15s,transform .15s;min-width:135px;
-}
+.btn-save.rose{background:linear-gradient(135deg,#9f1239,#be185d);box-shadow:0 4px 14px #9f123944}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+.toggle-label{font-size:.9rem;font-weight:600}
+.toggle-sub{font-size:.78rem;color:var(--muted);margin-top:2px}
+.toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;border-radius:24px;background:var(--border);cursor:pointer;transition:background .3s}
+.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;border-radius:50%;background:#fff;transition:transform .3s}
+.toggle-switch input:checked+.toggle-slider{background:var(--accent)}
+.toggle-switch input:checked+.toggle-slider::before{transform:translateX(20px)}
+.editor-toolbar{display:flex;flex-wrap:wrap;gap:5px;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:9px 9px 0 0;border-bottom:none}
+.toolbar-btn{padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card2);color:var(--txt);font-family:inherit;font-size:.8rem;cursor:pointer;transition:all .15s;white-space:nowrap}
+.toolbar-btn:hover{background:#1e3a5f;border-color:var(--accent)}
+.toolbar-sep{width:1px;background:var(--border);margin:0 3px;align-self:stretch}
+.ts-input-row{display:flex;gap:6px;align-items:center;width:100%}
+.ts-input-row input{flex:1;padding:5px 9px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--txt);font-family:inherit;font-size:.82rem;outline:none}
+.ts-input-row input:focus{border-color:var(--accent2)}
+.field .editor-area{border-radius:0 0 9px 9px;border:1px solid var(--border);border-top:none;padding:10px 13px;background:var(--bg);color:var(--txt);font-family:inherit;font-size:.92rem;min-height:120px;resize:vertical;outline:none;width:100%;line-height:1.7;transition:border-color .2s,box-shadow .2s}
+.field .editor-area:focus{border-color:var(--accent);box-shadow:0 0 0 3px #3b82f620}
+.row2{display:flex;gap:12px}
+.row2 .field{flex:1}
+/* CTX MENU */
+.ctx-menu{position:fixed;z-index:2000;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:5px;box-shadow:0 8px 28px #00000077;opacity:0;pointer-events:none;transform:scale(.9);transition:opacity .15s,transform .15s;min-width:135px}
 .ctx-menu.active{opacity:1;pointer-events:all;transform:scale(1)}
-.ctx-item{
-  display:flex;align-items:center;gap:7px;width:100%;padding:8px 11px;
-  border:none;background:none;color:var(--txt);font-family:inherit;
-  font-size:.88rem;cursor:pointer;border-radius:6px;text-align:right;transition:background .15s;
-}
+.ctx-item{display:flex;align-items:center;gap:7px;width:100%;padding:8px 11px;border:none;background:none;color:var(--txt);font-family:inherit;font-size:.88rem;cursor:pointer;border-radius:6px;text-align:right;transition:background .15s}
 .ctx-item:hover{background:var(--bg-card2)}
-.ctx-item.del{color:#ef4444}.ctx-item.del:hover{background:#ef444411}
-
-/* ══ TOAST ══ */
-.toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
-  background:#1e3a5f;border:1px solid var(--accent);color:var(--txt);
-  padding:11px 22px;border-radius:30px;font-size:.88rem;font-weight:600;
-  z-index:9999;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;
-  opacity:0;white-space:nowrap;box-shadow:0 8px 24px #00000066;
-}
+.ctx-item.del{color:#ef4444}
+.ctx-item.del:hover{background:#ef444411}
+/* CONFIRM */
+.confirm-box{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;max-width:400px;width:100%;box-shadow:0 24px 60px #00000099;transform:translateY(30px) scale(.96);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.modal-overlay.active .confirm-box{transform:translateY(0) scale(1)}
+.confirm-box h3{font-size:1.05rem;font-weight:700;margin-bottom:10px}
+.confirm-box p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.confirm-stat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.confirm-stat-item{flex:1;min-width:80px;padding:10px;border-radius:10px;background:var(--bg);border:1px solid var(--border);text-align:center}
+.confirm-stat-item .csn{font-size:1.3rem;font-weight:900;color:var(--txt)}
+.confirm-stat-item .csl{font-size:.72rem;color:var(--muted);margin-top:2px}
+.confirm-btns{display:flex;gap:10px;justify-content:flex-end}
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1e3a5f;border:1px solid var(--accent);color:var(--txt);padding:11px 22px;border-radius:30px;font-size:.88rem;font-weight:600;z-index:9999;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;white-space:nowrap;box-shadow:0 8px 24px #00000066}
+[data-theme="light"] .toast{background:#e0f2fe;border-color:var(--accent);color:#0c4a6e}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-
-/* ══ ANIMATIONS ══ */
+/* ANIMATIONS */
 @keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes popIn{from{opacity:0;transform:scale(.78) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-
-/* ══ RESPONSIVE ══ */
+/* RESPONSIVE */
 @media(max-width:640px){
   .header{flex-direction:column;align-items:flex-start}
   .header-actions{width:100%}
   .add-btn{flex:1;justify-content:center}
   .shortcuts-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
   .vault-grid{grid-template-columns:1fr}
+  .countdown-cards{grid-template-columns:1fr}
   .modal{max-width:100%;border-radius:16px}
   .tabs{gap:0}
   .tab-btn{padding:9px 13px;font-size:.85rem}
+  .theme-options,.lang-options{flex-direction:column}
+  .row2{flex-direction:column;gap:0}
 }
 @media(max-width:380px){
   .shortcuts-grid{grid-template-columns:1fr 1fr}
@@ -423,46 +282,38 @@ body{
 <div class="toast" id="toast"></div>
 
 <div class="container">
-
   <!-- HEADER -->
   <header class="header">
     <div class="header-left">
       <div class="logo">⚡</div>
       <div>
-        <h1>مختصراتي</h1>
-        <p class="subtitle">روابطك وسكريبتاتك وبياناتك في مكان واحد</p>
+        <h1 id="appTitle">مختصراتي</h1>
+        <p class="subtitle" id="appSubtitle">روابطك وسكريبتاتك وبياناتك في مكان واحد</p>
       </div>
     </div>
     <div class="header-actions" id="headerActions">
-      <button class="add-btn blue" id="addShortcutBtn">
-        <span class="add-btn-icon">+</span><span>إضافة مختصر</span>
-      </button>
-      <button class="add-btn violet" id="addScriptBtn" style="display:none">
-        <span class="add-btn-icon">+</span><span>إضافة سكريبت</span>
-      </button>
-      <button class="add-btn green" id="addVaultBtn" style="display:none">
-        <span class="add-btn-icon">+</span><span>إضافة بيانات</span>
-      </button>
+      <button class="add-btn blue" id="addShortcutBtn"><span class="add-btn-icon">+</span><span id="btnAddShortcut">إضافة مختصر</span></button>
+      <button class="add-btn violet" id="addScriptBtn" style="display:none"><span class="add-btn-icon">+</span><span id="btnAddScript">إضافة سكريبت</span></button>
+      <button class="add-btn green" id="addVaultBtn" style="display:none"><span class="add-btn-icon">+</span><span id="btnAddVault">إضافة بيانات</span></button>
+      <button class="add-btn rose" id="addTaskBtn" style="display:none"><span class="add-btn-icon">+</span><span id="btnAddTask">إضافة مهمة</span></button>
+      <button class="settings-btn" id="settingsBtn" title="الإعدادات">⚙️</button>
     </div>
   </header>
 
   <!-- BACKUP BAR -->
   <div class="backup-bar">
-    <button class="backup-btn export" id="exportBtn">
-      <span class="bico">💾</span> تصدير النسخة الاحتياطية
-    </button>
-    <button class="backup-btn import" id="importBtn">
-      <span class="bico">📂</span> استيراد نسخة احتياطية
-    </button>
+    <button class="backup-btn export" id="exportBtn">💾 <span id="exportLabel">تصدير نسخة احتياطية</span></button>
+    <button class="backup-btn import" id="importBtn">📂 <span id="importLabel">استيراد نسخة احتياطية</span></button>
     <input type="file" id="importFile" accept=".json" style="display:none"/>
-    <div class="backup-bar-label">🛡️ بياناتك محفوظة في <span>localStorage</span></div>
+    <div class="backup-bar-label">🛡️ <span id="storageLabel">البيانات محفوظة في localStorage</span></div>
   </div>
 
   <!-- TABS -->
   <div class="tabs">
-    <button class="tab-btn active" data-tab="shortcuts">🔗 المختصرات</button>
-    <button class="tab-btn" data-tab="scripts">🎬 السكريبتات</button>
-    <button class="tab-btn" data-tab="vault">🔐 الخزنة</button>
+    <button class="tab-btn active" data-tab="shortcuts" id="tabShortcuts">🔗 المختصرات</button>
+    <button class="tab-btn" data-tab="scripts" id="tabScripts">🎬 السكريبتات</button>
+    <button class="tab-btn" data-tab="vault" id="tabVault">🔐 الخزنة</button>
+    <button class="tab-btn" data-tab="tasks" id="tabTasks">✅ المهام</button>
   </div>
 
   <!-- TAB: SHORTCUTS -->
@@ -470,7 +321,7 @@ body{
     <div class="shortcuts-grid" id="shortcutsGrid">
       <div class="empty-state" id="emptyShortcuts">
         <div class="empty-icon">🔗</div>
-        <p>لا يوجد مختصرات بعد</p>
+        <p id="emptyShortcutsText">لا يوجد مختصرات بعد</p>
         <span>اضغط على "إضافة مختصر" للبدء</span>
       </div>
     </div>
@@ -498,12 +349,25 @@ body{
     </div>
   </div>
 
+  <!-- TAB: TASKS -->
+  <div class="tab-panel" id="tab-tasks">
+    <div class="tasks-container">
+      <div class="tasks-controls">
+        <div class="tasks-filter">
+          <button class="filter-btn active" data-filter="all" id="filterAll">الكل</button>
+          <button class="filter-btn" data-filter="pending" id="filterPending">قيد التنفيذ</button>
+          <button class="filter-btn" data-filter="done" id="filterDone">مكتملة</button>
+        </div>
+        <div class="tasks-stats" id="tasksStats"></div>
+      </div>
+      <div class="tasks-list" id="tasksList"></div>
+      <div class="countdown-cards" id="countdownCards"></div>
+    </div>
+  </div>
 </div><!-- /container -->
 
 
-<!-- ══════════════════════════════════════
-     MODAL: SHORTCUT
-══════════════════════════════════════ -->
+<!-- ══ MODAL: SHORTCUT ══ -->
 <div class="modal-overlay" id="shortcutModal">
   <div class="modal">
     <div class="modal-header">
@@ -511,18 +375,9 @@ body{
       <button class="modal-close" data-close="shortcutModal">✕</button>
     </div>
     <div class="modal-body">
-      <div class="field">
-        <label>🔗 الرابط <span class="required">*</span></label>
-        <input type="url" id="sUrl" placeholder="https://example.com"/>
-      </div>
-      <div class="field">
-        <label>✏️ الاسم</label>
-        <input type="text" id="sName" placeholder="اسم تلقائي برقم إن تُرك فارغاً"/>
-      </div>
-      <div class="field">
-        <label>📝 الوصف</label>
-        <input type="text" id="sDesc" placeholder="وصف قصير (اختياري)"/>
-      </div>
+      <div class="field"><label>🔗 الرابط <span class="required">*</span></label><input type="url" id="sUrl" placeholder="https://example.com"/></div>
+      <div class="field"><label>✏️ الاسم</label><input type="text" id="sName" placeholder="اسم تلقائي برقم إن تُرك فارغاً"/></div>
+      <div class="field"><label>📝 الوصف</label><input type="text" id="sDesc" placeholder="وصف قصير (اختياري)"/></div>
       <div class="field">
         <label>🎨 لون الزرار</label>
         <div class="color-picker" id="shortcutColors">
@@ -546,10 +401,7 @@ body{
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════
-     MODAL: SCRIPT
-══════════════════════════════════════ -->
+<!-- ══ MODAL: SCRIPT ══ -->
 <div class="modal-overlay" id="scriptModal">
   <div class="modal">
     <div class="modal-header">
@@ -557,29 +409,22 @@ body{
       <button class="modal-close" data-close="scriptModal">✕</button>
     </div>
     <div class="modal-body">
-      <div class="field">
-        <label>✏️ عنوان السكريبت <span class="required">*</span></label>
-        <input type="text" id="scTitle" placeholder="مثال: سكريبت تعريف المنتج"/>
-      </div>
+      <div class="field"><label>✏️ عنوان السكريبت <span class="required">*</span></label><input type="text" id="scTitle" placeholder="مثال: سكريبت تعريف المنتج"/></div>
       <div class="field">
         <label>🎬 نص السكريبت</label>
-        <!-- Toolbar -->
         <div class="editor-toolbar" id="editorToolbar">
           <button class="toolbar-btn" data-cmd="bold" title="عريض">B</button>
           <button class="toolbar-btn" data-cmd="italic" title="مائل"><i>I</i></button>
           <button class="toolbar-btn" data-cmd="underline" title="تحته خط"><u>U</u></button>
           <div class="toolbar-sep"></div>
           <div class="ts-input-row">
-            <input type="text" id="tsInput" placeholder="لقطة / توقيت (مثال: 0:45)"/>
+            <input type="text" id="tsInput" placeholder="توقيت (مثال: 0:45)"/>
             <button class="toolbar-btn" id="insertTsBtn">⏱ إدراج توقيت</button>
           </div>
         </div>
-        <textarea class="editor-area" id="scBody" placeholder="اكتب نص السكريبت هنا...&#10;استخدم الأدوات بالأعلى لتنسيق النص وإضافة توقيتات المونتاج"></textarea>
+        <textarea class="editor-area" id="scBody" placeholder="اكتب نص السكريبت هنا...&#10;استخدم الأدوات بالأعلى لتنسيق النص وإضافة توقيتات"></textarea>
       </div>
-      <div class="field">
-        <label>📝 ملاحظات / وصف (اختياري)</label>
-        <textarea id="scDesc" placeholder="ملاحظات إضافية عن هذا السكريبت..."></textarea>
-      </div>
+      <div class="field"><label>📝 ملاحظات / وصف (اختياري)</label><textarea id="scDesc" placeholder="ملاحظات إضافية..."></textarea></div>
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" data-close="scriptModal">إلغاء</button>
@@ -588,10 +433,7 @@ body{
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════
-     MODAL: VAULT
-══════════════════════════════════════ -->
+<!-- ══ MODAL: VAULT ══ -->
 <div class="modal-overlay" id="vaultModal">
   <div class="modal">
     <div class="modal-header">
@@ -599,22 +441,10 @@ body{
       <button class="modal-close" data-close="vaultModal">✕</button>
     </div>
     <div class="modal-body">
-      <div class="field">
-        <label>🌐 اسم الموقع / الخدمة <span class="required">*</span></label>
-        <input type="text" id="vSite" placeholder="مثال: Google، Netflix، Instagram"/>
-      </div>
-      <div class="field">
-        <label>📧 الإيميل / اسم المستخدم <span class="required">*</span></label>
-        <input type="text" id="vEmail" placeholder="example@gmail.com"/>
-      </div>
-      <div class="field">
-        <label>🔑 كلمة المرور <span class="required">*</span></label>
-        <input type="password" id="vPass" placeholder="••••••••"/>
-      </div>
-      <div class="field">
-        <label>📝 ملاحظة (اختياري)</label>
-        <input type="text" id="vNote" placeholder="ملاحظة إضافية"/>
-      </div>
+      <div class="field"><label>🌐 اسم الموقع / الخدمة <span class="required">*</span></label><input type="text" id="vSite" placeholder="مثال: Google، Netflix"/></div>
+      <div class="field"><label>📧 الإيميل / اسم المستخدم <span class="required">*</span></label><input type="text" id="vEmail" placeholder="example@gmail.com"/></div>
+      <div class="field"><label>🔑 كلمة المرور <span class="required">*</span></label><input type="password" id="vPass" placeholder="••••••••"/></div>
+      <div class="field"><label>📝 ملاحظة (اختياري)</label><input type="text" id="vNote" placeholder="ملاحظة إضافية"/></div>
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" data-close="vaultModal">إلغاء</button>
@@ -623,13 +453,93 @@ body{
   </div>
 </div>
 
+<!-- ══ MODAL: TASK ══ -->
+<div class="modal-overlay" id="taskModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="taskModalTitle">إضافة مهمة جديدة</h2>
+      <button class="modal-close" data-close="taskModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label>✏️ عنوان المهمة <span class="required">*</span></label><input type="text" id="tTitle" placeholder="مثال: مراجعة المشروع"/></div>
+      <div class="field"><label>📝 تفاصيل (اختياري)</label><textarea id="tDesc" rows="2" placeholder="تفاصيل إضافية..."></textarea></div>
+      <div class="row2">
+        <div class="field">
+          <label>🔥 الأولوية</label>
+          <select id="tPrio">
+            <option value="low">منخفضة</option>
+            <option value="med" selected>متوسطة</option>
+            <option value="high">عالية</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>🏷️ التصنيف</label>
+          <input type="text" id="tCat" placeholder="مثال: عمل، شخصي"/>
+        </div>
+      </div>
+      <div class="field"><label>📅 تاريخ الاستحقاق (اختياري)</label><input type="datetime-local" id="tDue"/></div>
+      <div style="border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--bg);margin-bottom:4px">
+        <div class="toggle-row" style="padding:0 0 10px">
+          <div>
+            <div class="toggle-label">⏱️ إضافة عد تنازلي</div>
+            <div class="toggle-sub">يظهر مؤقت العد التنازلي للمهمة</div>
+          </div>
+          <label class="toggle-switch"><input type="checkbox" id="tCountdownToggle"/><span class="toggle-slider"></span></label>
+        </div>
+        <div id="countdownFields" style="display:none;padding-top:10px;border-top:1px solid var(--border)">
+          <div class="row2">
+            <div class="field" style="margin-bottom:0"><label>📅 تاريخ العد التنازلي</label><input type="datetime-local" id="tCountdownDate"/></div>
+            <div class="field" style="margin-bottom:0"><label>🏷️ تسمية المؤقت</label><input type="text" id="tCountdownLabel" placeholder="مثال: موعد التسليم"/></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" data-close="taskModal">إلغاء</button>
+      <button class="btn-save rose" id="saveTask">💾 حفظ</button>
+    </div>
+  </div>
+</div>
 
-<!-- IMPORT CONFIRM MODAL -->
+<!-- ══ MODAL: SETTINGS ══ -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header"><h2>⚙️ الإعدادات</h2><button class="modal-close" data-close="settingsModal">✕</button></div>
+    <div class="modal-body">
+      <div class="settings-section">
+        <div class="settings-section-title">المظهر</div>
+        <div class="theme-options">
+          <div class="theme-opt selected" data-theme-val="dark" id="themeOptDark"><div class="theme-opt-icon">🌙</div><div class="theme-opt-label">داكن</div></div>
+          <div class="theme-opt" data-theme-val="light" id="themeOptLight"><div class="theme-opt-icon">☀️</div><div class="theme-opt-label">فاتح</div></div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">اللغة</div>
+        <div class="lang-options">
+          <button class="lang-opt selected" data-lang-val="ar" id="langOptAr">🇸🇦 العربية</button>
+          <button class="lang-opt" data-lang-val="en" id="langOptEn">🇬🇧 English</button>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title" id="settingsDataTitle">البيانات</div>
+        <div style="font-size:.82rem;color:var(--muted);background:var(--bg);padding:12px;border-radius:10px;border:1px solid var(--border)">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span id="settingsShortcutsLabel">مختصرات</span><span id="settingsShortcutsCount" style="font-weight:700;color:var(--txt)">0</span></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span id="settingsScriptsLabel">سكريبتات</span><span id="settingsScriptsCount" style="font-weight:700;color:var(--txt)">0</span></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span id="settingsVaultLabel">بيانات خزنة</span><span id="settingsVaultCount" style="font-weight:700;color:var(--txt)">0</span></div>
+          <div style="display:flex;justify-content:space-between"><span id="settingsTasksLabel">مهام</span><span id="settingsTasksCount" style="font-weight:700;color:var(--txt)">0</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-cancel" data-close="settingsModal" id="settingsCloseBtn">إغلاق</button></div>
+  </div>
+</div>
+
+<!-- ══ IMPORT CONFIRM ══ -->
 <div class="modal-overlay" id="importConfirmModal">
   <div class="confirm-box">
     <h3>📂 تأكيد الاستيراد</h3>
     <div class="confirm-stat" id="importStats"></div>
-    <p>هل تريد استيراد هذه البيانات؟ سيتم <strong style="color:#ef4444">استبدال</strong> بياناتك الحالية بالكامل.</p>
+    <p id="importConfirmText">هل تريد استيراد هذه البيانات؟ سيتم <strong style="color:#ef4444">استبدال</strong> بياناتك الحالية بالكامل.</p>
     <div class="confirm-btns">
       <button class="btn-cancel" data-close="importConfirmModal">إلغاء</button>
       <button class="btn-save" id="confirmImportBtn">✅ نعم، استيراد</button>
@@ -643,89 +553,132 @@ body{
   <button class="ctx-item del" id="ctxDel">🗑️ حذف</button>
 </div>
 
-
 <script>
-/* ══════════════════════════════════════════════════
-   UTILS
-══════════════════════════════════════════════════ */
 const $ = id => document.getElementById(id);
-const KEYS = { shortcuts:'mok_shortcuts_v2', scripts:'mok_scripts_v1', vault:'mok_vault_v1' };
+const KEYS = {shortcuts:'mok_shortcuts_v2',scripts:'mok_scripts_v1',vault:'mok_vault_v1',tasks:'mok_tasks_v1',settings:'mok_settings_v1'};
+function load(k){try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return []}}
+function loadObj(k,def){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(def))}catch{return def}}
+function save(k,d){localStorage.setItem(k,JSON.stringify(d))}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function lighten(hex,a=28){let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return `rgb(${Math.min(255,r+a)},${Math.min(255,g+a)},${Math.min(255,b+a)})`}
+function getFavicon(url){try{return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`}catch{return null}}
 
-function load(key){ try{ return JSON.parse(localStorage.getItem(key)||'[]') }catch{ return [] } }
-function save(key,data){ localStorage.setItem(key, JSON.stringify(data)) }
-function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7) }
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+/* ══ SETTINGS / THEME / LANG ══ */
+let settings = loadObj(KEYS.settings, {theme:'dark', lang:'ar'});
+const T = {
+  ar:{appTitle:'مختصراتي',appSub:'روابطك وسكريبتاتك وبياناتك في مكان واحد',tabs:['🔗 المختصرات','🎬 السكريبتات','🔐 الخزنة','✅ المهام'],addShortcut:'إضافة مختصر',addScript:'إضافة سكريبت',addVault:'إضافة بيانات',addTask:'إضافة مهمة',export:'تصدير نسخة احتياطية',import:'استيراد نسخة احتياطية',storageLbl:'البيانات محفوظة في localStorage',filterAll:'الكل',filterPending:'قيد التنفيذ',filterDone:'مكتملة',total:'المجموع',done:'مكتملة',pending:'قيد التنفيذ',high:'عالية',med:'متوسطة',low:'منخفضة',saved:'✅ تم الحفظ',edited:'✅ تم التعديل',deleted:'🗑️ تم الحذف',copied:'📋 تم النسخ',exported:'💾 تم التصدير!',imported:'✅ تم الاستيراد!',invalidFile:'❌ الملف غير صالح!',emptyShortcuts:'لا يوجد مختصرات بعد',emptyTasks:'لا يوجد مهام بعد',countdown:'عد تنازلي',expired:'انتهى الوقت!',days:'يوم',hours:'ساعة',mins:'دقيقة',secs:'ثانية',settingsDataTitle:'البيانات',settingsShortcuts:'مختصرات',settingsScripts:'سكريبتات',settingsVault:'بيانات خزنة',settingsTasks:'مهام',yes:'✅ نعم، استيراد',cancel:'إلغاء',close:'إغلاق',save:'💾 حفظ',noCopy:'تعذّر النسخ'},
+  en:{appTitle:'My Shortcuts',appSub:'Links, scripts, vault & tasks — all in one place',tabs:['🔗 Shortcuts','🎬 Scripts','🔐 Vault','✅ Tasks'],addShortcut:'Add Shortcut',addScript:'Add Script',addVault:'Add Vault',addTask:'Add Task',export:'Export Backup',import:'Import Backup',storageLbl:'Data saved in localStorage',filterAll:'All',filterPending:'In Progress',filterDone:'Done',total:'Total',done:'Done',pending:'Pending',high:'High',med:'Medium',low:'Low',saved:'✅ Saved',edited:'✅ Updated',deleted:'🗑️ Deleted',copied:'📋 Copied',exported:'💾 Exported!',imported:'✅ Imported!',invalidFile:'❌ Invalid file!',emptyShortcuts:'No shortcuts yet',emptyTasks:'No tasks yet',countdown:'Countdown',expired:'Time is up!',days:'d',hours:'h',mins:'m',secs:'s',settingsDataTitle:'Data',settingsShortcuts:'Shortcuts',settingsScripts:'Scripts',settingsVault:'Vault items',settingsTasks:'Tasks',yes:'✅ Yes, Import',cancel:'Cancel',close:'Close',save:'💾 Save',noCopy:'Copy failed'}
+};
+function t(k){return T[settings.lang][k]||k}
 
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', settings.theme);
+  document.body.style.direction = settings.lang==='ar'?'rtl':'ltr';
+  document.documentElement.lang = settings.lang;
+  document.documentElement.dir = settings.lang==='ar'?'rtl':'ltr';
+  $('themeOptDark').classList.toggle('selected', settings.theme==='dark');
+  $('themeOptLight').classList.toggle('selected', settings.theme==='light');
+  $('langOptAr').classList.toggle('selected', settings.lang==='ar');
+  $('langOptEn').classList.toggle('selected', settings.lang==='en');
+}
+
+function applyLang(){
+  document.body.style.direction = settings.lang==='ar'?'rtl':'ltr';
+  document.documentElement.lang = settings.lang;
+  document.documentElement.dir = settings.lang==='ar'?'rtl':'ltr';
+  document.title = t('appTitle') + ' ⚡';
+  $('appTitle').textContent = t('appTitle');
+  $('appSubtitle').textContent = t('appSub');
+  $('btnAddShortcut').textContent = t('addShortcut');
+  $('btnAddScript').textContent = t('addScript');
+  $('btnAddVault').textContent = t('addVault');
+  $('btnAddTask').textContent = t('addTask');
+  $('exportLabel').textContent = t('export');
+  $('importLabel').textContent = t('import');
+  $('storageLabel').textContent = t('storageLbl');
+  $('filterAll').textContent = t('filterAll');
+  $('filterPending').textContent = t('filterPending');
+  $('filterDone').textContent = t('filterDone');
+  $('settingsDataTitle').textContent = t('settingsDataTitle');
+  $('settingsShortcutsLabel').textContent = t('settingsShortcuts');
+  $('settingsScriptsLabel').textContent = t('settingsScripts');
+  $('settingsVaultLabel').textContent = t('settingsVault');
+  $('settingsTasksLabel').textContent = t('settingsTasks');
+  $('importConfirmText').innerHTML = settings.lang==='ar'
+    ? 'هل تريد استيراد هذه البيانات؟ سيتم <strong style="color:#ef4444">استبدال</strong> بياناتك الحالية بالكامل.'
+    : 'Import this data? Your current data will be <strong style="color:#ef4444">completely replaced</strong>.';
+  $('settingsCloseBtn').textContent = t('close');
+  $('confirmImportBtn').textContent = t('yes');
+  ['tabShortcuts','tabScripts','tabVault','tabTasks'].forEach((id,i)=>{$(id).innerHTML=t('tabs')[i]});
+  updateSettingsCounts();
+}
+
+function updateSettingsCounts(){
+  $('settingsShortcutsCount').textContent = load(KEYS.shortcuts).length;
+  $('settingsScriptsCount').textContent = load(KEYS.scripts).length;
+  $('settingsVaultCount').textContent = load(KEYS.vault).length;
+  $('settingsTasksCount').textContent = load(KEYS.tasks).length;
+}
+
+document.querySelectorAll('[data-theme-val]').forEach(el=>{
+  el.addEventListener('click',()=>{ settings.theme=el.dataset.themeVal; save(KEYS.settings,settings); applyTheme(); });
+});
+document.querySelectorAll('[data-lang-val]').forEach(el=>{
+  el.addEventListener('click',()=>{ settings.lang=el.dataset.langVal; save(KEYS.settings,settings); applyTheme(); applyLang(); renderShortcuts();renderScripts();renderVault();renderTasks(); });
+});
+$('settingsBtn').addEventListener('click',()=>{ updateSettingsCounts(); openModal('settingsModal'); });
+
+applyTheme();
+applyLang();
+
+/* ══ TOAST ══ */
 function toast(msg, ms=2200){
-  const el=$('toast');
-  el.textContent=msg;
-  el.classList.add('show');
-  clearTimeout(el._t);
-  el._t=setTimeout(()=>el.classList.remove('show'), ms);
-}
-
-function lighten(hex,a=28){
-  let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-  return `rgb(${Math.min(255,r+a)},${Math.min(255,g+a)},${Math.min(255,b+a)})`;
-}
-
-function getFavicon(url){
-  try{ return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64` }catch{ return null }
+  const el=$('toast'); el.textContent=msg; el.classList.add('show');
+  clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),ms);
 }
 
 /* ══ TABS ══ */
-let activeTab = 'shortcuts';
+let activeTab='shortcuts';
 document.querySelectorAll('.tab-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    activeTab = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b===btn));
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.id==='tab-'+activeTab));
-    // show correct header button
-    $('addShortcutBtn').style.display = activeTab==='shortcuts'?'':'none';
-    $('addScriptBtn').style.display   = activeTab==='scripts'?'':'none';
-    $('addVaultBtn').style.display    = activeTab==='vault'?'':'none';
+    activeTab=btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b===btn));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+activeTab));
+    $('addShortcutBtn').style.display=activeTab==='shortcuts'?'':'none';
+    $('addScriptBtn').style.display=activeTab==='scripts'?'':'none';
+    $('addVaultBtn').style.display=activeTab==='vault'?'':'none';
+    $('addTaskBtn').style.display=activeTab==='tasks'?'':'none';
   });
 });
 
 /* ══ MODALS ══ */
-function openModal(id){ $(id).classList.add('active') }
-function closeModal(id){ $(id).classList.remove('active') }
-document.querySelectorAll('[data-close]').forEach(btn=>{
-  btn.addEventListener('click',()=>closeModal(btn.dataset.close));
-});
-document.querySelectorAll('.modal-overlay').forEach(ov=>{
-  ov.addEventListener('click',e=>{ if(e.target===ov) closeModal(ov.id) });
-});
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal-overlay.active').forEach(m=>closeModal(m.id)) });
+function openModal(id){$(id).classList.add('active')}
+function closeModal(id){$(id).classList.remove('active')}
+document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>closeModal(btn.dataset.close)));
+document.querySelectorAll('.modal-overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)closeModal(ov.id)}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.active').forEach(m=>closeModal(m.id))});
 
-/* ══════════════════════════════════════════════════
-   SHORTCUTS
-══════════════════════════════════════════════════ */
-let shortcuts = load(KEYS.shortcuts);
-let editShortcutId = null;
-let shortcutColor = '#6b7280';
-let dragSrc = null;
+/* ══ SHORTCUTS ══ */
+let shortcuts=load(KEYS.shortcuts), editShortcutId=null, shortcutColor='#6b7280', dragSrc=null;
 
 function nextShortcutName(){
-  const nums = shortcuts.map(s=>s.name).filter(n=>/^مختصر #\d+$/.test(n))
-    .map(n=>parseInt(n.replace('مختصر #','')));
-  return `مختصر #${nums.length?Math.max(...nums)+1:1}`;
+  const nums=shortcuts.map(s=>s.name).filter(n=>/^مختصر #\d+$/.test(n)||/^Shortcut #\d+$/.test(n)).map(n=>parseInt(n.replace(/^[^#]+#/,'')));
+  return `${settings.lang==='ar'?'مختصر':'Shortcut'} #${nums.length?Math.max(...nums)+1:1}`;
 }
 
 function renderShortcuts(){
-  const grid = $('shortcutsGrid');
+  const grid=$('shortcutsGrid');
   [...grid.querySelectorAll('.shortcut-card')].forEach(el=>el.remove());
-  const emp = $('emptyShortcuts');
-  if(!shortcuts.length){ emp.style.display=''; return; }
+  const emp=$('emptyShortcuts');
+  if(!shortcuts.length){emp.style.display='';return;}
   emp.style.display='none';
-  shortcuts.forEach((s,i)=>{ grid.appendChild(buildShortcutCard(s,i)); });
+  shortcuts.forEach((s,i)=>grid.appendChild(buildShortcutCard(s,i)));
 }
 
 function buildShortcutCard(s,i){
-  const card = document.createElement('div');
-  card.className='shortcut-card';
-  card.draggable=true;
-  card.dataset.id=s.id;
+  const card=document.createElement('div');
+  card.className='shortcut-card'; card.draggable=true; card.dataset.id=s.id;
   card.style.animationDelay=`${i*.05}s`;
   const fav=getFavicon(s.url);
   card.innerHTML=`
@@ -745,424 +698,338 @@ function buildShortcutCard(s,i){
       <button class="card-action-btn" data-act="edit">✏️</button>
       <button class="card-action-btn del" data-act="del">🗑️</button>
     </div>`;
-
-  // prevent drag-click conflict
-  card.querySelector('.card-link').addEventListener('click',e=>{
-    if(card.classList.contains('just-dragged')){ e.preventDefault(); card.classList.remove('just-dragged'); }
-  });
-  card.querySelectorAll('[data-act]').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      e.stopPropagation();
-      btn.dataset.act==='edit' ? openShortcutEdit(s.id) : deleteShortcut(s.id);
-    });
-  });
-  card.addEventListener('contextmenu',e=>{ e.preventDefault(); showCtx(e,s.id,'shortcut'); });
-  // Drag
-  card.addEventListener('dragstart',e=>{ dragSrc=i; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
-  card.addEventListener('dragend',()=>{ card.classList.add('just-dragged'); card.classList.remove('dragging'); clearDragOver(); setTimeout(()=>card.classList.remove('just-dragged'),200); });
-  card.addEventListener('dragover',e=>{ e.preventDefault(); if(dragSrc!==null&&dragSrc!==i){ clearDragOver(); card.classList.add('drag-over'); } });
-  card.addEventListener('drop',e=>{ e.preventDefault(); if(dragSrc!==null&&dragSrc!==i){ const m=shortcuts.splice(dragSrc,1)[0]; shortcuts.splice(i,0,m); dragSrc=null; save(KEYS.shortcuts,shortcuts); renderShortcuts(); } });
+  card.querySelector('.card-link').addEventListener('click',e=>{if(card.classList.contains('just-dragged')){e.preventDefault();card.classList.remove('just-dragged');}});
+  card.querySelectorAll('[data-act]').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();btn.dataset.act==='edit'?openShortcutModal(s.id):deleteShortcut(s.id);}));
+  card.addEventListener('contextmenu',e=>{e.preventDefault();showCtx(e,s.id,'shortcut');});
+  card.addEventListener('dragstart',e=>{dragSrc=i;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+  card.addEventListener('dragend',()=>{card.classList.add('just-dragged');card.classList.remove('dragging');clearDragOver();setTimeout(()=>card.classList.remove('just-dragged'),200);});
+  card.addEventListener('dragover',e=>{e.preventDefault();if(dragSrc!==null&&dragSrc!==i){clearDragOver();card.classList.add('drag-over');}});
+  card.addEventListener('drop',e=>{e.preventDefault();if(dragSrc!==null&&dragSrc!==i){const m=shortcuts.splice(dragSrc,1)[0];shortcuts.splice(i,0,m);dragSrc=null;save(KEYS.shortcuts,shortcuts);renderShortcuts();}});
   return card;
 }
 
-function clearDragOver(){ document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over')); }
+function clearDragOver(){document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));}
 
 function openShortcutModal(id=null){
   editShortcutId=id;
-  if(id){
-    const s=shortcuts.find(x=>x.id===id);
-    $('shortcutModalTitle').textContent='تعديل المختصر';
-    $('sUrl').value=s.url; $('sName').value=s.name;
-    $('sDesc').value=s.desc==='...'?'':s.desc;
-    setShortcutColor(s.color);
-  } else {
-    $('shortcutModalTitle').textContent='إضافة مختصر جديد';
-    $('sUrl').value=''; $('sName').value=''; $('sDesc').value='';
-    setShortcutColor('#6b7280');
-  }
-  openModal('shortcutModal');
-  setTimeout(()=>$('sUrl').focus(),350);
+  if(id){const s=shortcuts.find(x=>x.id===id);$('shortcutModalTitle').textContent='تعديل المختصر';$('sUrl').value=s.url;$('sName').value=s.name;$('sDesc').value=s.desc==='...'?'':s.desc;setShortcutColor(s.color);}
+  else{$('shortcutModalTitle').textContent=settings.lang==='ar'?'إضافة مختصر جديد':'New Shortcut';$('sUrl').value='';$('sName').value='';$('sDesc').value='';setShortcutColor('#6b7280');}
+  openModal('shortcutModal');setTimeout(()=>$('sUrl').focus(),350);
 }
-
-function openShortcutEdit(id){ openShortcutModal(id); }
-
-function setShortcutColor(c){
-  shortcutColor=c;
-  document.querySelectorAll('#shortcutColors .color-opt').forEach(o=>o.classList.toggle('selected',o.dataset.color===c));
-}
-
+function setShortcutColor(c){shortcutColor=c;document.querySelectorAll('#shortcutColors .color-opt').forEach(o=>o.classList.toggle('selected',o.dataset.color===c));}
 document.querySelectorAll('#shortcutColors .color-opt').forEach(o=>o.addEventListener('click',()=>setShortcutColor(o.dataset.color)));
-
 $('addShortcutBtn').addEventListener('click',()=>openShortcutModal());
 $('saveShortcut').addEventListener('click',()=>{
   let url=$('sUrl').value.trim();
-  if(!url){ $('sUrl').style.borderColor='#ef4444'; setTimeout(()=>$('sUrl').style.borderColor='',1500); $('sUrl').focus(); return; }
+  if(!url){$('sUrl').style.borderColor='#ef4444';setTimeout(()=>$('sUrl').style.borderColor='',1500);$('sUrl').focus();return;}
   if(!/^https?:\/\//i.test(url)) url='https://'+url;
   const name=$('sName').value.trim()||nextShortcutName();
   const desc=$('sDesc').value.trim()||'...';
-  if(editShortcutId){
-    const s=shortcuts.find(x=>x.id===editShortcutId);
-    Object.assign(s,{url,name,desc,color:shortcutColor});
-  } else {
-    shortcuts.push({id:uid(),url,name,desc,color:shortcutColor});
-  }
-  save(KEYS.shortcuts,shortcuts);
-  closeModal('shortcutModal');
-  renderShortcuts();
-  toast(editShortcutId?'✅ تم التعديل':'✅ تم الحفظ');
+  if(editShortcutId){Object.assign(shortcuts.find(x=>x.id===editShortcutId),{url,name,desc,color:shortcutColor});}
+  else shortcuts.push({id:uid(),url,name,desc,color:shortcutColor});
+  save(KEYS.shortcuts,shortcuts);closeModal('shortcutModal');renderShortcuts();toast(editShortcutId?t('edited'):t('saved'));
 });
-
 function deleteShortcut(id){
-  const card=document.querySelector(`[data-id="${id}"]`);
-  shortcuts=shortcuts.filter(s=>s.id!==id);
-  save(KEYS.shortcuts,shortcuts);
-  if(card){
-    card.style.transition='transform .3s,opacity .3s';
-    card.style.transform='scale(.7)';card.style.opacity='0';
-    setTimeout(()=>renderShortcuts(),280);
-  } else renderShortcuts();
-  toast('🗑️ تم الحذف');
+  const card=document.querySelector(`.shortcut-card[data-id="${id}"]`);
+  shortcuts=shortcuts.filter(s=>s.id!==id);save(KEYS.shortcuts,shortcuts);
+  if(card){card.style.transition='transform .3s,opacity .3s';card.style.transform='scale(.7)';card.style.opacity='0';setTimeout(()=>renderShortcuts(),280);}
+  else renderShortcuts();
+  toast(t('deleted'));
 }
 
-/* ══════════════════════════════════════════════════
-   SCRIPTS
-══════════════════════════════════════════════════ */
-let scripts = load(KEYS.scripts);
-let editScriptId = null;
+/* ══ SCRIPTS ══ */
+let scripts=load(KEYS.scripts), editScriptId=null;
 
-/* ── Toolbar commands ── */
 document.querySelectorAll('[data-cmd]').forEach(btn=>{
   btn.addEventListener('click',e=>{
-    e.preventDefault();
-    const ta=$('scBody');
-    const start=ta.selectionStart, end=ta.selectionEnd;
-    const sel=ta.value.slice(start,end);
-    const cmd=btn.dataset.cmd;
-    const tags={bold:['**','**'], italic:['//','//'], underline:['__','__']};
-    const [o,c]=tags[cmd];
-    const rep=o+sel+c;
-    ta.setRangeText(rep,start,end,'end');
-    ta.focus();
+    e.preventDefault();const ta=$('scBody');
+    const start=ta.selectionStart,end=ta.selectionEnd,sel=ta.value.slice(start,end);
+    const tags={bold:['**','**'],italic:['//','//'],underline:['__','__']};
+    const [o,c]=tags[btn.dataset.cmd];ta.setRangeText(o+sel+c,start,end,'end');ta.focus();
   });
 });
-
 $('insertTsBtn').addEventListener('click',e=>{
-  e.preventDefault();
-  const ta=$('scBody');
-  const ts=$('tsInput').value.trim()||'--:--';
-  const tag=`[⏱ ${ts}]`;
-  const pos=ta.selectionStart;
-  ta.setRangeText(tag,pos,pos,'end');
-  $('tsInput').value='';
-  ta.focus();
+  e.preventDefault();const ta=$('scBody');const ts=$('tsInput').value.trim()||'--:--';
+  ta.setRangeText(`[⏱ ${ts}]`,ta.selectionStart,ta.selectionStart,'end');$('tsInput').value='';ta.focus();
 });
 
 function renderScriptContent(raw){
   let html=esc(raw);
-  // timestamps
   html=html.replace(/\[⏱ ([^\]]+)\]/g,'<span class="ts">⏱ $1</span>');
-  // bold
   html=html.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
-  // italic
   html=html.replace(/\/\/(.+?)\/\//g,'<i>$1</i>');
-  // underline
   html=html.replace(/__(.+?)__/g,'<u>$1</u>');
   return html;
 }
 
 function renderScripts(){
-  const list=$('scriptsList');
-  list.innerHTML='';
-  if(!scripts.length){
-    list.innerHTML='<div class="empty-state"><div class="empty-icon">🎬</div><p>لا يوجد سكريبتات بعد</p><span>اضغط على "إضافة سكريبت" للبدء</span></div>';
-    return;
-  }
+  const list=$('scriptsList');list.innerHTML='';
+  if(!scripts.length){list.innerHTML='<div class="empty-state"><div class="empty-icon">🎬</div><p>لا يوجد سكريبتات بعد</p><span>اضغط على "إضافة سكريبت" للبدء</span></div>';return;}
   scripts.forEach((s,i)=>{
-    const card=document.createElement('div');
-    card.className='script-card';
-    card.dataset.id=s.id;
-    card.style.animationDelay=`${i*.06}s`;
-    card.innerHTML=`
-      <div class="script-header" data-toggle>
-        <span class="script-badge">🎬 سكريبت</span>
-        <span class="script-title">${esc(s.title)}</span>
-        <div class="script-actions">
-          <button class="card-action-btn" data-act="edit" title="تعديل">✏️</button>
-          <button class="card-action-btn del" data-act="del" title="حذف">🗑️</button>
-        </div>
-        <span class="script-chevron">▼</span>
-      </div>
-      <div class="script-body">
-        <div class="script-content">${renderScriptContent(s.body)}</div>
-        ${s.desc?`<div class="script-desc-area">📝 ${esc(s.desc)}</div>`:''}
-      </div>`;
-    card.querySelector('[data-toggle]').addEventListener('click',e=>{
-      if(e.target.closest('[data-act]')) return;
-      card.classList.toggle('open');
-    });
-    card.querySelectorAll('[data-act]').forEach(btn=>{
-      btn.addEventListener('click',e=>{
-        e.stopPropagation();
-        btn.dataset.act==='edit'?openScriptEdit(s.id):deleteScript(s.id);
-      });
-    });
+    const card=document.createElement('div');card.className='script-card';card.dataset.id=s.id;card.style.animationDelay=`${i*.06}s`;
+    card.innerHTML=`<div class="script-header" data-toggle>
+      <span class="script-badge">🎬 سكريبت</span><span class="script-title">${esc(s.title)}</span>
+      <div class="script-actions"><button class="card-action-btn" data-act="edit">✏️</button><button class="card-action-btn del" data-act="del">🗑️</button></div>
+      <span class="script-chevron">▼</span></div>
+      <div class="script-body"><div class="script-content">${renderScriptContent(s.body)}</div>${s.desc?`<div class="script-desc-area">📝 ${esc(s.desc)}</div>`:''}</div>`;
+    card.querySelector('[data-toggle]').addEventListener('click',e=>{if(e.target.closest('[data-act]'))return;card.classList.toggle('open');});
+    card.querySelectorAll('[data-act]').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();btn.dataset.act==='edit'?openScriptModal(s.id):deleteScript(s.id);}));
     list.appendChild(card);
   });
 }
 
 function openScriptModal(id=null){
   editScriptId=id;
-  if(id){
-    const s=scripts.find(x=>x.id===id);
-    $('scriptModalTitle').textContent='تعديل السكريبت';
-    $('scTitle').value=s.title;
-    $('scBody').value=s.body;
-    $('scDesc').value=s.desc||'';
-  } else {
-    $('scriptModalTitle').textContent='إضافة سكريبت جديد';
-    $('scTitle').value=''; $('scBody').value=''; $('scDesc').value='';
-  }
-  openModal('scriptModal');
-  setTimeout(()=>$('scTitle').focus(),350);
+  if(id){const s=scripts.find(x=>x.id===id);$('scriptModalTitle').textContent='تعديل السكريبت';$('scTitle').value=s.title;$('scBody').value=s.body;$('scDesc').value=s.desc||'';}
+  else{$('scriptModalTitle').textContent=settings.lang==='ar'?'إضافة سكريبت جديد':'New Script';$('scTitle').value='';$('scBody').value='';$('scDesc').value='';}
+  openModal('scriptModal');setTimeout(()=>$('scTitle').focus(),350);
 }
-
-function openScriptEdit(id){ openScriptModal(id); }
-
 $('addScriptBtn').addEventListener('click',()=>openScriptModal());
 $('saveScript').addEventListener('click',()=>{
   const title=$('scTitle').value.trim();
-  if(!title){ $('scTitle').style.borderColor='#ef4444'; setTimeout(()=>$('scTitle').style.borderColor='',1500); $('scTitle').focus(); return; }
-  const body=$('scBody').value;
-  const desc=$('scDesc').value.trim();
-  if(editScriptId){
-    const s=scripts.find(x=>x.id===editScriptId);
-    Object.assign(s,{title,body,desc});
-  } else {
-    scripts.push({id:uid(),title,body,desc});
-  }
-  save(KEYS.scripts,scripts);
-  closeModal('scriptModal');
-  renderScripts();
-  toast(editScriptId?'✅ تم التعديل':'✅ تم الحفظ');
+  if(!title){$('scTitle').style.borderColor='#ef4444';setTimeout(()=>$('scTitle').style.borderColor='',1500);$('scTitle').focus();return;}
+  const body=$('scBody').value,desc=$('scDesc').value.trim();
+  if(editScriptId){Object.assign(scripts.find(x=>x.id===editScriptId),{title,body,desc});}
+  else scripts.push({id:uid(),title,body,desc});
+  save(KEYS.scripts,scripts);closeModal('scriptModal');renderScripts();toast(editScriptId?t('edited'):t('saved'));
 });
+function deleteScript(id){scripts=scripts.filter(s=>s.id!==id);save(KEYS.scripts,scripts);renderScripts();toast(t('deleted'));}
 
-function deleteScript(id){
-  scripts=scripts.filter(s=>s.id!==id);
-  save(KEYS.scripts,scripts);
-  renderScripts();
-  toast('🗑️ تم الحذف');
-}
-
-/* ══════════════════════════════════════════════════
-   VAULT
-══════════════════════════════════════════════════ */
-let vault = load(KEYS.vault);
-let editVaultId = null;
+/* ══ VAULT ══ */
+let vault=load(KEYS.vault),editVaultId=null;
 
 function renderVault(){
-  const grid=$('vaultGrid');
-  grid.innerHTML='';
-  if(!vault.length){
-    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔐</div><p>الخزنة فارغة</p><span>اضغط على "إضافة بيانات" للبدء</span></div>';
-    return;
-  }
+  const grid=$('vaultGrid');grid.innerHTML='';
+  if(!vault.length){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔐</div><p>الخزنة فارغة</p><span>اضغط على "إضافة بيانات" للبدء</span></div>';return;}
   vault.forEach((v,i)=>{
-    const card=document.createElement('div');
-    card.className='vault-card';
-    card.style.animationDelay=`${i*.06}s`;
-    card.dataset.id=v.id;
-    card.innerHTML=`
-      <div class="vault-card-header">
-        <div class="vault-icon">🌐</div>
-        <span class="vault-site">${esc(v.site)}</span>
-      </div>
-      <div class="vault-email-row">
-        <span class="vault-label">📧</span>
-        <span class="vault-val" id="ve-${v.id}">${esc(v.email)}</span>
-        <button class="vault-copy-btn" data-copy="email" title="نسخ الإيميل">📋</button>
-      </div>
-      <div class="vault-pass-row">
-        <span class="vault-label">🔑</span>
-        <span class="vault-val pass-hidden" id="vp-${v.id}" data-shown="0">••••••••</span>
-        <button class="vault-toggle-btn" data-toggle-pass title="إظهار/إخفاء">👁</button>
-        <button class="vault-copy-btn" data-copy="pass" title="نسخ كلمة المرور">📋</button>
-      </div>
+    const card=document.createElement('div');card.className='vault-card';card.style.animationDelay=`${i*.06}s`;card.dataset.id=v.id;
+    card.innerHTML=`<div class="vault-card-header"><div class="vault-icon">🌐</div><span class="vault-site">${esc(v.site)}</span></div>
+      <div class="vault-email-row"><span class="vault-label">📧</span><span class="vault-val" id="ve-${v.id}">${esc(v.email)}</span><button class="vault-copy-btn" data-copy="email" title="نسخ">📋</button></div>
+      <div class="vault-pass-row"><span class="vault-label">🔑</span><span class="vault-val pass-hidden" id="vp-${v.id}" data-shown="0">••••••••</span><button class="vault-toggle-btn" data-toggle-pass title="إظهار/إخفاء">👁</button><button class="vault-copy-btn" data-copy="pass" title="نسخ">📋</button></div>
       ${v.note?`<div style="font-size:.78rem;color:var(--muted);margin-top:8px;padding:6px 8px;background:var(--bg);border-radius:7px;border:1px solid var(--border)">📝 ${esc(v.note)}</div>`:''}
-      <div class="vault-card-actions">
-        <button class="card-action-btn" data-act="edit">✏️</button>
-        <button class="card-action-btn del" data-act="del">🗑️</button>
-      </div>`;
-    // toggle password
-    card.querySelector('[data-toggle-pass]').addEventListener('click',()=>{
-      const span=document.getElementById(`vp-${v.id}`);
-      const shown=span.dataset.shown==='1';
-      span.textContent=shown?'••••••••':v.pass;
-      span.classList.toggle('pass-hidden',shown);
-      span.dataset.shown=shown?'0':'1';
-    });
-    // copy
-    card.querySelectorAll('[data-copy]').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const val=btn.dataset.copy==='email'?v.email:v.pass;
-        navigator.clipboard.writeText(val).then(()=>toast('📋 تم النسخ')).catch(()=>toast('تعذّر النسخ'));
-      });
-    });
-    card.querySelectorAll('[data-act]').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        btn.dataset.act==='edit'?openVaultEdit(v.id):deleteVault(v.id);
-      });
-    });
+      <div class="vault-card-actions"><button class="card-action-btn" data-act="edit">✏️</button><button class="card-action-btn del" data-act="del">🗑️</button></div>`;
+    card.querySelector('[data-toggle-pass]').addEventListener('click',()=>{const sp=document.getElementById(`vp-${v.id}`);const shown=sp.dataset.shown==='1';sp.textContent=shown?'••••••••':v.pass;sp.classList.toggle('pass-hidden',shown);sp.dataset.shown=shown?'0':'1';});
+    card.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',()=>{const val=btn.dataset.copy==='email'?v.email:v.pass;navigator.clipboard.writeText(val).then(()=>toast(t('copied'))).catch(()=>toast(t('noCopy')));}));
+    card.querySelectorAll('[data-act]').forEach(btn=>btn.addEventListener('click',()=>{btn.dataset.act==='edit'?openVaultModal(v.id):deleteVault(v.id);}));
     grid.appendChild(card);
   });
 }
 
 function openVaultModal(id=null){
   editVaultId=id;
-  if(id){
-    const v=vault.find(x=>x.id===id);
-    $('vaultModalTitle').textContent='تعديل البيانات';
-    $('vSite').value=v.site; $('vEmail').value=v.email;
-    $('vPass').value=v.pass; $('vNote').value=v.note||'';
-  } else {
-    $('vaultModalTitle').textContent='إضافة بيانات جديدة';
-    $('vSite').value=''; $('vEmail').value=''; $('vPass').value=''; $('vNote').value='';
-  }
-  openModal('vaultModal');
-  setTimeout(()=>$('vSite').focus(),350);
+  if(id){const v=vault.find(x=>x.id===id);$('vaultModalTitle').textContent='تعديل البيانات';$('vSite').value=v.site;$('vEmail').value=v.email;$('vPass').value=v.pass;$('vNote').value=v.note||'';}
+  else{$('vaultModalTitle').textContent=settings.lang==='ar'?'إضافة بيانات جديدة':'New Vault Entry';$('vSite').value='';$('vEmail').value='';$('vPass').value='';$('vNote').value='';}
+  openModal('vaultModal');setTimeout(()=>$('vSite').focus(),350);
 }
-
-function openVaultEdit(id){ openVaultModal(id); }
-
 $('addVaultBtn').addEventListener('click',()=>openVaultModal());
 $('saveVault').addEventListener('click',()=>{
-  const site=$('vSite').value.trim();
-  const email=$('vEmail').value.trim();
-  const pass=$('vPass').value;
-  if(!site||!email||!pass){
-    [['vSite',site],['vEmail',email],['vPass',pass]].forEach(([id,v])=>{
-      if(!v){ $(id).style.borderColor='#ef4444'; setTimeout(()=>$(id).style.borderColor='',1500); }
-    });
-    return;
-  }
+  const site=$('vSite').value.trim(),email=$('vEmail').value.trim(),pass=$('vPass').value;
+  if(!site||!email||!pass){[['vSite',site],['vEmail',email],['vPass',pass]].forEach(([id,v])=>{if(!v){$(id).style.borderColor='#ef4444';setTimeout(()=>$(id).style.borderColor='',1500);}});return;}
   const note=$('vNote').value.trim();
-  if(editVaultId){
-    const v=vault.find(x=>x.id===editVaultId);
-    Object.assign(v,{site,email,pass,note});
-  } else {
-    vault.push({id:uid(),site,email,pass,note});
-  }
-  save(KEYS.vault,vault);
-  closeModal('vaultModal');
-  renderVault();
-  toast(editVaultId?'✅ تم التعديل':'✅ تم الحفظ');
+  if(editVaultId){Object.assign(vault.find(x=>x.id===editVaultId),{site,email,pass,note});}
+  else vault.push({id:uid(),site,email,pass,note});
+  save(KEYS.vault,vault);closeModal('vaultModal');renderVault();toast(editVaultId?t('edited'):t('saved'));
+});
+function deleteVault(id){vault=vault.filter(v=>v.id!==id);save(KEYS.vault,vault);renderVault();toast(t('deleted'));}
+
+/* ══ TASKS ══ */
+let tasks=load(KEYS.tasks),editTaskId=null,taskFilter='all';
+let countdownIntervals={};
+
+$('tCountdownToggle').addEventListener('change',function(){
+  $('countdownFields').style.display=this.checked?'block':'none';
 });
 
-function deleteVault(id){
-  vault=vault.filter(v=>v.id!==id);
-  save(KEYS.vault,vault);
-  renderVault();
-  toast('🗑️ تم الحذف');
+function formatCountdown(targetMs){
+  const diff=targetMs-Date.now();
+  if(diff<=0) return null;
+  return {d:Math.floor(diff/86400000),h:Math.floor((diff%86400000)/3600000),m:Math.floor((diff%3600000)/60000),s:Math.floor((diff%60000)/1000),diff};
 }
 
-/* ══════════════════════════════════════════════════
-   CONTEXT MENU (shortcuts only)
-══════════════════════════════════════════════════ */
-let ctxTargetId=null;
-function showCtx(e,id,type){
-  ctxTargetId={id,type};
-  const cm=$('ctxMenu');
-  cm.style.top=`${e.clientY}px`;
-  cm.style.left=`${e.clientX}px`;
-  cm.classList.add('active');
-  requestAnimationFrame(()=>{
-    const r=cm.getBoundingClientRect();
-    if(r.right>window.innerWidth) cm.style.left=`${e.clientX-r.width}px`;
-    if(r.bottom>window.innerHeight) cm.style.top=`${e.clientY-r.height}px`;
+function renderCountdownCard(task){
+  if(!task.countdown||!task.countdown.date) return '';
+  const ts=new Date(task.countdown.date).getTime();
+  const cd=formatCountdown(ts);
+  const lbl=task.countdown.label||t('countdown');
+  if(!cd){
+    return `<div class="countdown-card expired-cd">
+      <div class="countdown-card-title">⏱️ ${esc(lbl)}</div>
+      <div class="cd-expired-msg">🔴 ${t('expired')}</div>
+      <div class="countdown-card-footer"><span class="cd-sub">${esc(task.title)}</span></div></div>`;
+  }
+  return `<div class="countdown-card" id="cd-${task.id}">
+    <div class="countdown-card-title">⏱️ ${esc(lbl)}</div>
+    <div class="countdown-display">
+      <div class="cd-unit"><div class="cd-num" id="cd-d-${task.id}">${cd.d}</div><div class="cd-label">${t('days')}</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cd-h-${task.id}">${cd.h}</div><div class="cd-label">${t('hours')}</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cd-m-${task.id}">${cd.m}</div><div class="cd-label">${t('mins')}</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cd-s-${task.id}">${cd.s}</div><div class="cd-label">${t('secs')}</div></div>
+    </div>
+    <div class="countdown-card-footer"><span class="cd-sub">${esc(task.title)}</span></div></div>`;
+}
+
+function startCountdowns(){
+  Object.values(countdownIntervals).forEach(clearInterval);
+  countdownIntervals={};
+  tasks.filter(tk=>tk.countdown&&tk.countdown.date&&!tk.done).forEach(task=>{
+    const ts=new Date(task.countdown.date).getTime();
+    countdownIntervals[task.id]=setInterval(()=>{
+      const cd=formatCountdown(ts);
+      if(!cd){clearInterval(countdownIntervals[task.id]);delete countdownIntervals[task.id];renderTasks();return;}
+      const dEl=document.getElementById(`cd-d-${task.id}`);
+      if(dEl){dEl.textContent=cd.d;document.getElementById(`cd-h-${task.id}`).textContent=cd.h;document.getElementById(`cd-m-${task.id}`).textContent=cd.m;document.getElementById(`cd-s-${task.id}`).textContent=cd.s;}
+    },1000);
   });
 }
-function hideCtx(){ $('ctxMenu').classList.remove('active'); ctxTargetId=null; }
 
-$('ctxEdit').addEventListener('click',()=>{ if(ctxTargetId){ openShortcutEdit(ctxTargetId.id); hideCtx(); } });
-$('ctxDel').addEventListener('click',()=>{ if(ctxTargetId){ deleteShortcut(ctxTargetId.id); hideCtx(); } });
-document.addEventListener('click',hideCtx);
-document.addEventListener('contextmenu',e=>{ if(!e.target.closest('.shortcut-card')) hideCtx(); });
-
-/* ══════════════════════════════════════════════════
-   BACKUP — EXPORT & IMPORT
-══════════════════════════════════════════════════ */
-let pendingImport = null;
-
-function exportBackup(){
-  const data = {
-    version: 1,
-    exportedAt: new Date().toISOString(),
-    shortcuts: load(KEYS.shortcuts),
-    scripts:   load(KEYS.scripts),
-    vault:     load(KEYS.vault)
-  };
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], {type:'application/json'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  const date = new Date().toLocaleDateString('ar-EG').replace(/\//g,'-');
-  a.href     = url;
-  a.download = `مختصراتي-نسخة-${date}.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  toast('💾 تم تصدير النسخة الاحتياطية بنجاح!', 2800);
+function getTimerBadge(task){
+  if(!task.countdown||!task.countdown.date) return '';
+  const ts=new Date(task.countdown.date).getTime();
+  const cd=formatCountdown(ts);
+  if(!cd) return `<span class="task-timer-badge expired">⏱ ${t('expired')}</span>`;
+  if(cd.diff<3600000) return `<span class="task-timer-badge running">⏱ ${cd.h}h ${cd.m}m ${cd.s}s</span>`;
+  if(cd.d>0) return `<span class="task-timer-badge">⏱ ${cd.d}${t('days')} ${cd.h}${t('hours')}</span>`;
+  return `<span class="task-timer-badge">⏱ ${cd.h}${t('hours')} ${cd.m}${t('mins')}</span>`;
 }
 
-$('exportBtn').addEventListener('click', exportBackup);
+function renderTasks(){
+  Object.values(countdownIntervals).forEach(clearInterval);
+  countdownIntervals={};
+  const list=$('tasksList'),cdCards=$('countdownCards');
+  list.innerHTML='';cdCards.innerHTML='';
+  let filtered=tasks;
+  if(taskFilter==='pending') filtered=tasks.filter(x=>!x.done);
+  else if(taskFilter==='done') filtered=tasks.filter(x=>x.done);
+  const total=tasks.length,done=tasks.filter(x=>x.done).length,pending=tasks.filter(x=>!x.done).length;
+  $('tasksStats').innerHTML=`<div class="task-stat">${t('total')}: <span>${total}</span></div><div class="task-stat">${t('done')}: <span>${done}</span></div><div class="task-stat">${t('pending')}: <span>${pending}</span></div>`;
+  if(!filtered.length){
+    list.innerHTML=`<div class="empty-state"><div class="empty-icon">✅</div><p>${t('emptyTasks')}</p></div>`;
+  } else {
+    filtered.forEach((task,i)=>{
+      const card=document.createElement('div');
+      card.className='task-item'+(task.done?' done':'');
+      card.style.animationDelay=`${i*.04}s`;
+      const prioLbl={high:t('high'),med:t('med'),low:t('low')};
+      let dueBadge='';
+      if(task.due){const d=new Date(task.due),now=new Date();const over=!task.done&&d<now;dueBadge=`<span class="task-due${over?' overdue':''}">${over?'⚠️ ':'📅 '}${d.toLocaleDateString(settings.lang==='ar'?'ar-EG':'en-GB',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</span>`;}
+      card.innerHTML=`
+        <div class="task-check" data-id="${task.id}">${task.done?'✓':''}</div>
+        <div class="task-body">
+          <div class="task-text">${esc(task.title)}</div>
+          ${task.desc?`<div style="font-size:.78rem;color:var(--muted);margin-top:3px">${esc(task.desc)}</div>`:''}
+          <div class="task-meta">
+            <span class="task-prio ${task.prio}">${prioLbl[task.prio]||task.prio}</span>
+            ${task.cat?`<span class="task-cat">${esc(task.cat)}</span>`:''}
+            ${dueBadge}${getTimerBadge(task)}
+          </div>
+        </div>
+        <div class="task-actions">
+          <button class="card-action-btn" data-act="edit">✏️</button>
+          <button class="card-action-btn del" data-act="del">🗑️</button>
+        </div>`;
+      card.querySelector('.task-check').addEventListener('click',()=>{task.done=!task.done;save(KEYS.tasks,tasks);renderTasks();});
+      card.querySelectorAll('[data-act]').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();btn.dataset.act==='edit'?openTaskModal(task.id):deleteTask(task.id);}));
+      list.appendChild(card);
+    });
+  }
+  const cdTasks=tasks.filter(tk=>tk.countdown&&tk.countdown.date&&!tk.done);
+  if(cdTasks.length){cdCards.innerHTML=cdTasks.map(renderCountdownCard).join('');startCountdowns();}
+  updateSettingsCounts();
+}
 
-$('importBtn').addEventListener('click', () => $('importFile').click());
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    taskFilter=btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b===btn));
+    renderTasks();
+  });
+});
 
-$('importFile').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      const data = JSON.parse(ev.target.result);
-      if(!data.version || !Array.isArray(data.shortcuts)) throw new Error('ملف غير صالح');
-      pendingImport = data;
-      // show stats
-      const stats = $('importStats');
-      stats.innerHTML = `
+function openTaskModal(id=null){
+  editTaskId=id;
+  $('tCountdownToggle').checked=false;$('countdownFields').style.display='none';
+  if(id){
+    const task=tasks.find(x=>x.id===id);
+    $('taskModalTitle').textContent=settings.lang==='ar'?'تعديل المهمة':'Edit Task';
+    $('tTitle').value=task.title;$('tDesc').value=task.desc||'';$('tPrio').value=task.prio||'med';$('tCat').value=task.cat||'';$('tDue').value=task.due||'';
+    if(task.countdown&&task.countdown.date){$('tCountdownToggle').checked=true;$('countdownFields').style.display='block';$('tCountdownDate').value=task.countdown.date||'';$('tCountdownLabel').value=task.countdown.label||'';}
+    else{$('tCountdownDate').value='';$('tCountdownLabel').value='';}
+  } else {
+    $('taskModalTitle').textContent=settings.lang==='ar'?'إضافة مهمة جديدة':'New Task';
+    $('tTitle').value='';$('tDesc').value='';$('tPrio').value='med';$('tCat').value='';$('tDue').value='';$('tCountdownDate').value='';$('tCountdownLabel').value='';
+  }
+  openModal('taskModal');setTimeout(()=>$('tTitle').focus(),350);
+}
+$('addTaskBtn').addEventListener('click',()=>openTaskModal());
+$('saveTask').addEventListener('click',()=>{
+  const title=$('tTitle').value.trim();
+  if(!title){$('tTitle').style.borderColor='#ef4444';setTimeout(()=>$('tTitle').style.borderColor='',1500);$('tTitle').focus();return;}
+  const prio=$('tPrio').value,cat=$('tCat').value.trim(),due=$('tDue').value,desc=$('tDesc').value.trim();
+  let countdown=null;
+  if($('tCountdownToggle').checked&&$('tCountdownDate').value){countdown={date:$('tCountdownDate').value,label:$('tCountdownLabel').value.trim()};}
+  if(editTaskId){Object.assign(tasks.find(x=>x.id===editTaskId),{title,desc,prio,cat,due,countdown});}
+  else tasks.push({id:uid(),title,desc,prio,cat,due,countdown,done:false,createdAt:Date.now()});
+  save(KEYS.tasks,tasks);closeModal('taskModal');renderTasks();toast(editTaskId?t('edited'):t('saved'));
+});
+function deleteTask(id){tasks=tasks.filter(tk=>tk.id!==id);save(KEYS.tasks,tasks);renderTasks();toast(t('deleted'));}
+
+/* ══ CTX MENU ══ */
+let ctxTargetId=null;
+function showCtx(e,id){
+  ctxTargetId={id};const cm=$('ctxMenu');
+  cm.style.top=`${e.clientY}px`;cm.style.left=`${e.clientX}px`;cm.classList.add('active');
+  requestAnimationFrame(()=>{const r=cm.getBoundingClientRect();if(r.right>window.innerWidth)cm.style.left=`${e.clientX-r.width}px`;if(r.bottom>window.innerHeight)cm.style.top=`${e.clientY-r.height}px`;});
+}
+function hideCtx(){$('ctxMenu').classList.remove('active');ctxTargetId=null;}
+$('ctxEdit').addEventListener('click',()=>{if(ctxTargetId){openShortcutModal(ctxTargetId.id);hideCtx();}});
+$('ctxDel').addEventListener('click',()=>{if(ctxTargetId){deleteShortcut(ctxTargetId.id);hideCtx();}});
+document.addEventListener('click',hideCtx);
+document.addEventListener('contextmenu',e=>{if(!e.target.closest('.shortcut-card'))hideCtx();});
+
+/* ══ BACKUP ══ */
+let pendingImport=null;
+$('exportBtn').addEventListener('click',()=>{
+  const data={version:2,exportedAt:new Date().toISOString(),shortcuts:load(KEYS.shortcuts),scripts:load(KEYS.scripts),vault:load(KEYS.vault),tasks:load(KEYS.tasks)};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download=`مختصراتي-${new Date().toLocaleDateString('ar-EG').replace(/\//g,'-')}.json`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  toast(t('exported'),2800);
+});
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',e=>{
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(!data.version||!Array.isArray(data.shortcuts)) throw new Error('bad');
+      pendingImport=data;
+      $('importStats').innerHTML=`
         <div class="confirm-stat-item"><div class="csn">${data.shortcuts.length}</div><div class="csl">🔗 مختصر</div></div>
         <div class="confirm-stat-item"><div class="csn">${(data.scripts||[]).length}</div><div class="csl">🎬 سكريبت</div></div>
         <div class="confirm-stat-item"><div class="csn">${(data.vault||[]).length}</div><div class="csl">🔐 بيانات</div></div>
-      `;
+        <div class="confirm-stat-item"><div class="csn">${(data.tasks||[]).length}</div><div class="csl">✅ مهام</div></div>`;
       openModal('importConfirmModal');
-    } catch {
-      toast('❌ الملف غير صالح أو تالف!', 3000);
-    }
-    e.target.value = ''; // reset input
+    }catch{toast(t('invalidFile'),3000);}
+    e.target.value='';
   };
   reader.readAsText(file);
 });
-
-$('confirmImportBtn').addEventListener('click', () => {
-  if(!pendingImport) return;
-  save(KEYS.shortcuts, pendingImport.shortcuts || []);
-  save(KEYS.scripts,   pendingImport.scripts   || []);
-  save(KEYS.vault,     pendingImport.vault      || []);
-  shortcuts = load(KEYS.shortcuts);
-  scripts   = load(KEYS.scripts);
-  vault     = load(KEYS.vault);
-  closeModal('importConfirmModal');
-  pendingImport = null;
-  renderShortcuts();
-  renderScripts();
-  renderVault();
-  toast('✅ تم الاستيراد بنجاح!', 2800);
+$('confirmImportBtn').addEventListener('click',()=>{
+  if(!pendingImport)return;
+  save(KEYS.shortcuts,pendingImport.shortcuts||[]);save(KEYS.scripts,pendingImport.scripts||[]);save(KEYS.vault,pendingImport.vault||[]);save(KEYS.tasks,pendingImport.tasks||[]);
+  shortcuts=load(KEYS.shortcuts);scripts=load(KEYS.scripts);vault=load(KEYS.vault);tasks=load(KEYS.tasks);
+  closeModal('importConfirmModal');pendingImport=null;
+  renderShortcuts();renderScripts();renderVault();renderTasks();
+  toast(t('imported'),2800);
 });
 
 /* ══ INIT ══ */
 renderShortcuts();
 renderScripts();
 renderVault();
+renderTasks();
 </script>
 </body>
 </html>
